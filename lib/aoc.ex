@@ -22,6 +22,8 @@ defmodule AOC do
     Module.concat(mod_year, mod_day)
   end
 
+  def p1(), do: p1(Date.utc_today.day(), Date.utc_today().year)
+  def p2(), do: p2(Date.utc_today.day(), Date.utc_today().year)
   def p1(day), do: p1(day, Date.utc_today().year)
   def p2(day), do: p2(day, Date.utc_today().year)
   def p1(day, year), do: module_name(year, day).p1()
