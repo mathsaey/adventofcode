@@ -36,7 +36,6 @@ aoc 2018, 2 do
   defp acc_counts({false, true}, {twos, threes}), do: {twos, threes + 1}
   defp acc_counts({false, false}, {twos, threes}), do: {twos, threes}
 
-
   defp all_diffs(line, stream) do
     stream
     |> Stream.map(&diff(line, &1))
