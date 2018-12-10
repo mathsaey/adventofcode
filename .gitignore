@@ -1,6 +1,9 @@
 # Ignore inputs
 input/
 
+# Ignore configuration as it only contains private data
+config/
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 
