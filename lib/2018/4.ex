@@ -2,7 +2,7 @@ import AOC
 
 aoc 2018, 4 do
   def get do
-    input()
+    input_stream()
     |> Enum.sort()
     |> Stream.map(&Regex.scan(~r/\[1518-(\d\d)-(\d\d) (\d\d):(\d\d)\] (.*)/, &1))
     |> Stream.map(&tl(hd(&1)))

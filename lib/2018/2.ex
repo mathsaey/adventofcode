@@ -3,7 +3,7 @@ import AOC
 aoc 2018, 2 do
   def p1 do
     {twos, threes} =
-      input()
+      input_stream()
       |> Stream.map(&String.codepoints/1)
       |> Stream.map(&counts/1)
       |> Stream.map(fn map -> {check_amount(map, 2), check_amount(map, 3)} end)
@@ -12,7 +12,7 @@ aoc 2018, 2 do
   end
 
   def p2 do
-    s = input()
+    s = input_stream()
     r = s
     |> Stream.map(fn el -> {el, all_diffs(el, s)} end)
     |> Stream.reject(fn {_, lst} -> lst == [] end)

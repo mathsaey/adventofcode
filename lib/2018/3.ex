@@ -22,7 +22,7 @@ aoc 2018, 3 do
   end
 
   def claims do
-    input()
+    input_stream()
     |> Stream.map(&Regex.scan(~r/#(\d+) @ (\d+),(\d+): (\d+)x(\d+)/, &1))
     |> Stream.map(&tl(hd(&1)))
     |> Stream.map(fn line -> Enum.map(line, &String.to_integer/1) end)

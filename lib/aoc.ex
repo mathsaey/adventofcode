@@ -4,7 +4,9 @@ defmodule AOC do
       defmodule unquote(module_name(year, day)) do
         @path"input/#{unquote(year)}_#{unquote(day)}.txt"
 
-        def input do
+        def input_path, do: @path
+
+        def input_stream do
           @path
           |> Path.expand()
           |> File.stream!()
@@ -22,6 +24,7 @@ defmodule AOC do
     Module.concat(mod_year, mod_day)
   end
 
+  # Helpers to make the iex experience a bit smoother
   def p1(), do: p1(Date.utc_today.day(), Date.utc_today().year)
   def p2(), do: p2(Date.utc_today.day(), Date.utc_today().year)
   def p1(day), do: p1(day, Date.utc_today().year)

@@ -2,7 +2,11 @@ import AOC, only: :macros
 
 aoc 2018, 5 do
   def get() do
-    input() |> Stream.take(1) |> Enum.to_list() |> hd() |> String.codepoints()
+    input_stream()
+    |> Stream.take(1)
+    |> Enum.to_list()
+    |> hd()
+    |> String.codepoints()
   end
 
   def p1() do
