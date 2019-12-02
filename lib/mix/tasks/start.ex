@@ -5,6 +5,16 @@ defmodule Mix.Tasks.Aoc.Start do
   def run(args) do
     {session, year, day} = parse_args(args)
 
+    # Create directory for year if it does not exist yet
+    unless File.exists?(code_dir(year, day)) do
+      File.mkdir_p!(code_dir(year, day))
+    end
+
+    # Ensure input directory is present
+    unless File.exists?(input_dir(year, day)) do
+      File.mkdir_p!(input_dir(year, day))
+    end
+
     # Fetch input
     unless File.exists?(input_path(year, day)) do
       File.write(input_path(year, day), get_input(session, year, day))
@@ -54,6 +64,8 @@ defmodule Mix.Tasks.Aoc.Start do
   defp url(year, day), do: to_charlist("https://adventofcode.com/#{year}/day/#{day}/input")
   defp cookie(session), do: {'Cookie', to_charlist("session=#{session}")}
 
-  defp input_path(year, day), do: "input/#{year}_#{day}.txt" |> Path.expand()
-  defp code_path(year, day), do: "lib/#{year}/#{day}.ex" |> Path.expand()
+  defp input_path(y, d), do: input_dir(y, d) |> Path.join("#{y}_#{d}.txt")
+  defp input_dir(_y, _d), do: "input/" |> Path.expand()
+  defp code_path(y, d), do: code_dir(y, d) |> Path.join("#{d}.ex")
+  defp code_dir(y, _d), do: "lib/#{y}/" |> Path.expand()
 end
