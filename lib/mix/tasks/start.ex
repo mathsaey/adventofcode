@@ -39,9 +39,16 @@ defmodule Mix.Tasks.Aoc.Start do
     {kw[:session] || session, kw[:year] || year, kw[:day] || day}
   end
 
+  defp start_applications do
+    :ok = Application.ensure_started(:inets)
+    :ok = Application.ensure_started(:crypto)
+    :ok = Application.ensure_started(:asn1)
+    :ok = Application.ensure_started(:public_key)
+    :ok = Application.ensure_started(:ssl)
+  end
+
   defp get_input(session, year, day) do
-    Application.ensure_started(:inets)
-    Application.ensure_started(:ssl)
+    start_applications()
     resp = :httpc.request(:get, {url(year, day), [cookie(session)]}, [], [])
     {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, body}} = resp
     body
