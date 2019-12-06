@@ -2,13 +2,13 @@ defmodule AOC do
   defmacro aoc(year, day, do: body) do
     quote do
       defmodule unquote(module_name(year, day)) do
-        @path"input/#{unquote(year)}_#{unquote(day)}.txt"
+        @path Path.expand("input/#{unquote(year)}_#{unquote(day)}.txt")
 
         def input_path, do: @path
+        def input_string, do: File.read!(@path)
 
         def input_stream do
           @path
-          |> Path.expand()
           |> File.stream!()
           |> Stream.map(&String.trim/1)
         end
