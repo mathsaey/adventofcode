@@ -9,4 +9,10 @@ defmodule Aoc.MixProject do
       deps: []
     ]
   end
+
+  def application do
+    [
+      extra_applications: [:inets]
+    ]
+  end
 end
