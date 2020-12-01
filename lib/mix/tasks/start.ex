@@ -23,14 +23,17 @@ defmodule Mix.Tasks.Aoc.Start do
     unless File.exists?(code_path(year, day)) do
       File.write(code_path(year, day), template(year, day))
     end
+
+    IO.puts(url(year, day))
   end
 
   defp parse_args(args) do
-    {kw, _, _} = OptionParser.parse(
-      args,
-      aliases: [s: :session, y: :year, d: :day],
-      strict: [session: :string, year: :integer, day: :integer]
-    )
+    {kw, _, _} =
+      OptionParser.parse(
+        args,
+        aliases: [s: :session, y: :year, d: :day],
+        strict: [session: :string, year: :integer, day: :integer]
+      )
 
     session = Application.get_env(:aoc, :session, nil)
     year = Date.utc_today().year
@@ -49,7 +52,7 @@ defmodule Mix.Tasks.Aoc.Start do
 
   defp get_input(session, year, day) do
     start_applications()
-    resp = :httpc.request(:get, {url(year, day), [cookie(session)]}, [], [])
+    resp = :httpc.request(:get, {"#{url(year, day)}/input", [cookie(session)]}, [], [])
     {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, body}} = resp
     body
   end
@@ -68,7 +71,7 @@ defmodule Mix.Tasks.Aoc.Start do
     """
   end
 
-  defp url(year, day), do: to_charlist("https://adventofcode.com/#{year}/day/#{day}/input")
+  defp url(year, day), do: to_charlist("https://adventofcode.com/#{year}/day/#{day}")
   defp cookie(session), do: {'Cookie', to_charlist("session=#{session}")}
 
   defp input_path(y, d), do: input_dir(y, d) |> Path.join("#{y}_#{d}.txt")
