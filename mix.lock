@@ -1,2 +1,3 @@
 %{
+  "advent_of_code_utils": {:hex, :advent_of_code_utils, "0.1.0", "193cb63fd6b3f76d027861778391837aaba5955dc48a3235844edf0ee947a56d", [:mix], [], "hexpm", "22288fb9831df6e75590698c3d4d50b7be9b539fec120d1272e9d94b00b978b2"},
 }

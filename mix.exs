@@ -6,7 +6,13 @@ defmodule Aoc.MixProject do
       app: :aoc,
       version: "0.1.0",
       elixir: "~> 1.7",
-      deps: []
+      deps: deps()
+    ]
+  end
+
+  defp deps do
+    [
+      {:advent_of_code_utils, "~> 0.1.0"}
     ]
   end
 
