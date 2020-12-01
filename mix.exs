@@ -12,7 +12,7 @@ defmodule Aoc.MixProject do
 
   defp deps do
     [
-      {:advent_of_code_utils, "~> 0.1.0"}
+      {:advent_of_code_utils, "~> 0.1.1"}
     ]
   end
 
