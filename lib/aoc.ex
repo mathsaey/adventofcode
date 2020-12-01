@@ -13,6 +13,9 @@ defmodule AOC do
           |> Stream.map(&String.trim/1)
         end
 
+        defoverridable input_stream: 0
+        defoverridable input_string: 0
+
         unquote(body)
       end
     end
@@ -25,8 +28,8 @@ defmodule AOC do
   end
 
   # Helpers to make the iex experience a bit smoother
-  def p1(), do: p1(Date.utc_today.day(), Date.utc_today().year)
-  def p2(), do: p2(Date.utc_today.day(), Date.utc_today().year)
+  def p1(), do: p1(Date.utc_today().day(), Date.utc_today().year)
+  def p2(), do: p2(Date.utc_today().day(), Date.utc_today().year)
   def p1(day), do: p1(day, Date.utc_today().year)
   def p2(day), do: p2(day, Date.utc_today().year)
   def p1(day, year), do: module_name(year, day).p1()
