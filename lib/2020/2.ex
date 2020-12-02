@@ -1,17 +1,6 @@
 import AOC
 
 aoc 2020, 2 do
-  def example_input do
-    """
-      1-3 a: abcde
-      1-3 b: cdefg
-      2-9 c: ccccccccc
-    """
-    |> String.trim()
-    |> String.split("\n")
-    |> Enum.map(&String.trim/1)
-  end
-
   def p1, do: solve(&verify_p1/1)
   def p2, do: solve(&verify_p2/1)
 
