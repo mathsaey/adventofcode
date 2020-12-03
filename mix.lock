@@ -1,3 +1,3 @@
 %{
-  "advent_of_code_utils": {:hex, :advent_of_code_utils, "0.1.2", "a60791887bc939e5828bbb6f3d62c3bc2f37e5e64d014b75617b9f164fcdc768", [:mix], [], "hexpm", "d48713a2dfe65d35a264e0d36c65bd6004ad91726c994f3d32663d949aceef01"},
+  "advent_of_code_utils": {:hex, :advent_of_code_utils, "0.1.3", "e9cb43556f4f4762470b03c5983f254a1ec7bea9165b7f3163bc861fb1f523a3", [:mix], [], "hexpm", "e31877fe16b3748178e18daaa0f394a21e5902a3c07e786f5e7ba9593daa02f6"},
 }
