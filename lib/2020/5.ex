@@ -5,10 +5,7 @@ aoc 2020, 5 do
 
   def p2 do
     ids = input_stream() |> Stream.map(&id/1) |> MapSet.new()
-
-    0..(127 * 8 + 8)
-    |> Enum.filter(&(&1 not in ids and (&1 - 1) in ids and (&1 + 1) in ids))
-    |> hd()
+    0..(127 * 8 + 8) |> Enum.find(&(&1 not in ids and (&1 - 1) in ids and (&1 + 1) in ids))
   end
 
   def id(<<row::binary-size(7), col::binary-size(3)>>) do
