@@ -7,7 +7,7 @@ aoc 2021, 1 do
   def p2 do
     input_stream()
     |> Stream.chunk_every(3, 1, :discard)
-    |> Enum.to_list()
+    |> Stream.map(&Enum.sum/1)
     |> count_increasing()
   end
 
