@@ -6,10 +6,8 @@ aoc 2021, 1 do
 
   def p2 do
     input_stream()
-    |> Stream.transform([], fn
-      el, [p1, p2] -> {[el + p1 + p2], [el, p1]}
-      el, lst -> {[], [el | lst]}
-    end)
+    |> Stream.chunk_every(3, 1, :discard)
+    |> Enum.to_list()
     |> count_increasing()
   end
 
