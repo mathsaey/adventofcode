@@ -26,11 +26,7 @@ aoc 2021, 5 do
     for x <- x1..x2, y <- y1..y2, do: {x, y}
   end
 
-  def expand({{x1, y1}, {x2, y2}}) do
-    lrange = x1..x2//if(x1 < x2, do: 1, else: -1)
-    rrange = y1..y2//if(y1 < y2, do: 1, else: -1)
-    Enum.zip(lrange, rrange)
-  end
+  def expand({{x1, y1}, {x2, y2}}), do: Enum.zip(x1..x2, y1..y2)
 
   def count_overlaps(stream) do
     stream
