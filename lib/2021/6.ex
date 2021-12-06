@@ -3,8 +3,7 @@ import AOC
 aoc 2021, 6 do
   def p1, do: solve(80)
   def p2, do: solve(256)
-
-  def solve(days), do: input() |> to_map() |> simulate_loop(days) |> count()
+  def solve(days), do: input() |> to_map() |> simulate_loop(days) |> Map.values() |> Enum.sum()
 
   def input do
     input_string() |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
@@ -27,6 +26,4 @@ aoc 2021, 6 do
 
   def simulate_loop(state, 0), do: state
   def simulate_loop(state, n), do: state |> simulate() |> simulate_loop(n - 1)
-
-  def count(state), do: state |> Map.values() |> Enum.sum()
 end
