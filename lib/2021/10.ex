@@ -12,17 +12,15 @@ aoc 2021, 10 do
   end
 
   def p2 do
-    scores =
-      input_stream()
-      |> Stream.map(&parse/1)
-      |> Stream.reject(&corrupted?/1)
-      |> Stream.map(fn [{:remaining, lst}] -> lst end)
-      |> Stream.map(fn lst ->
-        lst |> Enum.map(&completion_score/1) |> Enum.reduce(0, &(&2 * 5 + &1))
-      end)
-      |> Enum.sort()
-
-    Enum.drop(scores, div(length(scores), 2)) |> hd()
+    input_stream()
+    |> Stream.map(&parse/1)
+    |> Stream.reject(&corrupted?/1)
+    |> Stream.map(fn [{:remaining, lst}] -> lst end)
+    |> Stream.map(fn lst ->
+      lst |> Enum.map(&completion_score/1) |> Enum.reduce(0, &(&2 * 5 + &1))
+    end)
+    |> Enum.sort()
+    |> then(&Enum.at(&1, div(length(&1), 2)))
   end
 
   def corrupted?([{:delimiter, _} | _]), do: true
