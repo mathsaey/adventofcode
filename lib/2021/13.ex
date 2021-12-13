@@ -42,7 +42,8 @@ aoc 2021, 13 do
   def fold({:horizontal, line}, dots), do: fold(line, dots, &elem(&1, 0), &put_elem(&1, 0, &2))
 
   def print(set) do
-    {max_x, max_y} = Enum.max(set)
+    {max_x, _} = Enum.max_by(set, &elem(&1, 0))
+    {_, max_y} = Enum.max_by(set, &elem(&1, 1))
     Enum.map_join(0..max_y, "\n", fn y ->
       Enum.map_join(0..max_x, &if({&1, y} in set, do: "█", else: " "))
     end)
