@@ -1,6 +1,10 @@
 import AOC
 
 aoc 2021, 15 do
+  def p1, do: input_stream() |> parse() |> solve()
+  def p2, do: input_stream() |> parse() |> expand() |> solve()
+  def solve(stream), do: stream |> to_grid() |> a_star() |> score()
+
   def parse(stream) do
     stream
     |> Stream.map(&String.to_integer/1)
@@ -27,7 +31,7 @@ aoc 2021, 15 do
     |> Stream.take(5)
     |> Stream.with_index(offset)
     |> Stream.flat_map(fn {lst, idx} ->
-      lst |> Enum.map(&(&1 + idx)) |> Enum.map(&(if &1 == 9, do: 9, else: rem(&1, 9)))
+      lst |> Enum.map(&(&1 + idx)) |> Enum.map(&rem(&1 - 1, 9) + 1)
     end)
     |> Enum.to_list()
   end
@@ -97,14 +101,6 @@ aoc 2021, 15 do
   Backtrack from goal to start and calculate score
   """
   def score({pred, map, goal}), do: score(pred, map, goal, 0)
-
   def score(_, _, {0, 0}, total), do: total
   def score(pred, map, cur, total), do: score(pred, map, pred[cur], total + map[cur])
-
-  def solve(stream), do: stream |> to_grid() |> a_star() |> score()
-  def p1, do: input_stream() |> parse() |> solve()
-
-  def p2 do
-    input_stream() |> parse() |> expand() |> solve()
-  end
 end
