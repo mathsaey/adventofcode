@@ -1,3 +1,4 @@
 %{
   "advent_of_code_utils": {:hex, :advent_of_code_utils, "1.0.1", "cc489d16c034d220cf2ba880e78867041eaf6c8b0e4a3159afed05534bcf9c84", [:mix], [], "hexpm", "b47a3f682abef192f93d605ddaf6134ad8a4b7c06066a39cc557d8b5b175dcb3"},
+  "heap": {:hex, :heap, "2.0.2", "d98cb178286cfeb5edbcf17785e2d20af73ca57b5a2cf4af584118afbcf917eb", [:mix], [], "hexpm", "ba9ea2fe99eb4bcbd9a8a28eaf71cbcac449ca1d8e71731596aace9028c9d429"},
 }
