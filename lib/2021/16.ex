@@ -5,15 +5,7 @@ aoc 2021, 16 do
   def p2, do: input_string() |> to_tree() |> eval()
 
   def input_string(), do: super() |> String.trim()
-  def to_tree(string), do: string |> hex_to_bits() |> parse_package() |> elem(0)
-
-  def hex_to_bits(string) do
-    string
-    |> String.graphemes()
-    |> Enum.map(&String.to_integer(&1, 16))
-    |> Enum.map(&<<&1::4>>)
-    |> Enum.reduce(<<>>, &<<&2::bits, &1::bits>>)
-  end
+  def to_tree(string), do: string |> :binary.decode_hex() |> parse_package() |> elem(0)
 
   def bits_to_int(bits) do
     s = bit_size(bits)
@@ -42,20 +34,20 @@ aoc 2021, 16 do
     {[p | ps], tl}
   end
 
-  def parse(<<1::1, 0::1, 0::1, tl::bits>>), do: parse_lit(tl)
-  def parse(<<o::3, tl::bits>>), do: parse_op(tl, o)
+  def parse(<<1::1, 0::1, 0::1, tl::bits>>), do: parse_literal(tl)
+  def parse(<<o::3, tl::bits>>), do: parse_operator(tl, o)
 
   def parse_version(<<v::3, tl::bits>>), do: {v, tl}
 
-  def parse_lit(bits), do: parse_lit(bits, <<>>)
-  def parse_lit(<<0::1, b::4, tl::bits>>, res), do: {bits_to_int(<<res::bits, b::4>>), tl}
-  def parse_lit(<<1::1, b::4, tl::bits>>, res), do: parse_lit(tl, <<res::bits, b::4>>)
+  def parse_literal(bits), do: parse_literal(bits, <<>>)
+  def parse_literal(<<0::1, b::4, tl::bits>>, res), do: {bits_to_int(<<res::bits, b::4>>), tl}
+  def parse_literal(<<1::1, b::4, tl::bits>>, res), do: parse_literal(tl, <<res::bits, b::4>>)
 
-  def parse_op(<<0::1, size::15, sub::size(size), tl::bitstring>>, op) do
+  def parse_operator(<<0::1, size::15, sub::size(size), tl::bits>>, op) do
     {{op, parse_packages(<<sub::size(size)>>)}, tl}
   end
 
-  def parse_op(<<1::1, amount::11, tl::bits>>, op) do
+  def parse_operator(<<1::1, amount::11, tl::bits>>, op) do
     {operands, tl} = parse_n_packages(tl, amount)
     {{op, operands}, tl}
   end
