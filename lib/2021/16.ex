@@ -45,33 +45,32 @@ aoc 2021, 16 do
   def parse(<<1::1, 0::1, 0::1, tl::bits>>), do: parse_lit(tl)
   def parse(<<o::3, tl::bits>>), do: parse_op(tl, o)
 
-  def parse_version(<<v::3, tl::bits>>), do: {{:v, v}, tl}
+  def parse_version(<<v::3, tl::bits>>), do: {v, tl}
 
   def parse_lit(bits), do: parse_lit(bits, <<>>)
-  def parse_lit(<<0::1, b::4, tl::bits>>, res), do: {{:l, bits_to_int(<<res::bits, b::4>>)}, tl}
+  def parse_lit(<<0::1, b::4, tl::bits>>, res), do: {bits_to_int(<<res::bits, b::4>>), tl}
   def parse_lit(<<1::1, b::4, tl::bits>>, res), do: parse_lit(tl, <<res::bits, b::4>>)
 
   def parse_op(<<0::1, size::15, sub::size(size), tl::bitstring>>, op) do
-    {{:o, op, parse_packages(<<sub::size(size)>>)}, tl}
+    {{op, parse_packages(<<sub::size(size)>>)}, tl}
   end
 
   def parse_op(<<1::1, amount::11, tl::bits>>, op) do
     {operands, tl} = parse_n_packages(tl, amount)
-    {{:o, op, operands}, tl}
+    {{op, operands}, tl}
   end
 
-  def count_versions({:v, v}), do: v
-  def count_versions({:l, _}), do: 0
-  def count_versions({:o, _, lst}), do: lst |> Enum.map(&count_versions/1) |> Enum.sum()
-  def count_versions({t1, t2}), do: count_versions(t1) + count_versions(t2)
+  def count_versions(n) when is_number(n), do: 0
+  def count_versions({_, l}) when is_list(l), do: l |> Enum.map(&count_versions/1) |> Enum.sum()
+  def count_versions({v, p}), do: v + count_versions(p)
 
-  def eval({{:v, _}, r}), do: eval(r)
-  def eval({:l, n}), do: n
-  def eval({:o, 0, lst}), do: lst |> Enum.map(&eval/1) |> Enum.sum()
-  def eval({:o, 1, lst}), do: lst |> Enum.map(&eval/1) |> Enum.product()
-  def eval({:o, 2, lst}), do: lst |> Enum.map(&eval/1) |> Enum.min()
-  def eval({:o, 3, lst}), do: lst |> Enum.map(&eval/1) |> Enum.max()
-  def eval({:o, 5, [l, r]}), do: if(eval(l) > eval(r), do: 1, else: 0)
-  def eval({:o, 6, [l, r]}), do: if(eval(l) < eval(r), do: 1, else: 0)
-  def eval({:o, 7, [l, r]}), do: if(eval(l) == eval(r), do: 1, else: 0)
+  def eval(n) when is_number(n), do: n
+  def eval({0, lst}) when is_list(lst), do: lst |> Enum.map(&eval/1) |> Enum.sum()
+  def eval({1, lst}) when is_list(lst), do: lst |> Enum.map(&eval/1) |> Enum.product()
+  def eval({2, lst}) when is_list(lst), do: lst |> Enum.map(&eval/1) |> Enum.min()
+  def eval({3, lst}) when is_list(lst), do: lst |> Enum.map(&eval/1) |> Enum.max()
+  def eval({5, [l, r]}), do: if(eval(l) > eval(r), do: 1, else: 0)
+  def eval({6, [l, r]}), do: if(eval(l) < eval(r), do: 1, else: 0)
+  def eval({7, [l, r]}), do: if(eval(l) == eval(r), do: 1, else: 0)
+  def eval({_version, r}), do: eval(r)
 end
