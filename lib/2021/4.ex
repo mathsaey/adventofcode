@@ -4,8 +4,6 @@ aoc 2021, 4 do
   def p1, do: {boards(), marked()} |> find(&first_winner/3) |> score()
   def p2, do: {boards(), marked()} |> find(&last_winner/3) |> score()
 
-  def input_string(), do: super() |> String.trim()
-
   def boards do
     input_string() |> String.split("\n\n") |> Enum.drop(1) |> Enum.map(&parse_board/1)
   end

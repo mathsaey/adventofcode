@@ -1,7 +1,7 @@
 import AOC
 
 aoc 2020, 23 do
-  def input, do: input_string() |> String.trim() |> String.to_integer() |> Integer.digits()
+  def input, do: input_string() |> String.to_integer() |> Integer.digits()
 
   def p1 do
     max = input() |> Enum.max()

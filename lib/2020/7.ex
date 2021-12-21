@@ -18,7 +18,6 @@ aoc 2020, 7 do
 
   def parse(input, split, regex, mapper) do
     input
-    |> String.trim()
     |> String.split(split)
     |> Enum.map(&Regex.run(regex, &1, capture: :all_but_first))
     |> Enum.map(mapper)

@@ -13,7 +13,7 @@ aoc 2020, 13 do
   end
 
   def parse do
-    [t0, ids, ""] = input_string() |> String.split("\n")
+    [t0, ids] = input_string() |> String.split("\n")
     {String.to_integer(t0), ids |> String.split(",") |> Enum.map(&parse_entry/1)}
   end
 

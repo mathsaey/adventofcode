@@ -2,10 +2,7 @@ import AOC
 
 aoc 2019, 4 do
   def range do
-    [from, to] = input_string()
-      |> String.trim()
-      |> String.split("-")
-      |> Enum.map(&String.to_integer/1)
+    [from, to] = input_string() |> String.split("-") |> Enum.map(&String.to_integer/1)
     from..to
   end
 

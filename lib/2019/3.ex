@@ -1,12 +1,7 @@
 import AOC
 
 aoc 2019, 3 do
-  def pre do
-    input_string()
-    |> String.trim()
-    |> String.split()
-    |> Enum.map(&process_path/1)
-  end
+  def pre, do: input_string() |> String.split() |> Enum.map(&process_path/1)
 
   def p1 do
     [s1, s2] = pre() |> Enum.map(&MapSet.new/1)

@@ -29,6 +29,6 @@ aoc 2020, 25 do
   def step(val, subject), do: rem(val * subject, @magic_number)
 
   def parse do
-    input_string() |> String.trim() |> String.split("\n") |> Enum.map(&String.to_integer/1)
+    input_string() |> String.split("\n") |> Enum.map(&String.to_integer/1)
   end
 end

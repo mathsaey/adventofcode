@@ -12,7 +12,7 @@ aoc 2021, 13 do
   end
 
   def parse(string) do
-    [dots, folds] = string |> String.trim() |> String.split("\n\n")
+    [dots, folds] = string |> String.split("\n\n")
     {parse_dots(dots), parse_folds(folds)}
   end
 

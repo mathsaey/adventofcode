@@ -1,9 +1,7 @@
 import AOC
 
 aoc 2020, 15 do
-  def parse do
-    input_string() |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
-  end
+  def parse, do: input_string() |> String.split(",") |> Enum.map(&String.to_integer/1)
 
   def seed do
     {{el, turn}, lst} = parse() |> Enum.with_index(1) |> List.pop_at(-1)

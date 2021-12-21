@@ -1,8 +1,6 @@
 import AOC
 
 aoc 2021, 17 do
-  def input_string(), do: super() |> String.trim()
-
   def p1 do
     {_, y1.._} = input_string() |> parse()
     # We are looking for the highest possible throw => positive y, independent of chosen x

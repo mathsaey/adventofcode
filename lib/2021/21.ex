@@ -1,8 +1,6 @@
 import AOC
 
 aoc 2021, 21 do
-  def input_string, do: super() |> String.trim()
-
   def p1 do
     {p1, p2} = input_string() |> parse()
 

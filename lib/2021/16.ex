@@ -4,7 +4,6 @@ aoc 2021, 16 do
   def p1, do: input_string() |> to_tree() |> count_versions()
   def p2, do: input_string() |> to_tree() |> eval()
 
-  def input_string(), do: super() |> String.trim()
   def to_tree(string), do: string |> :binary.decode_hex() |> parse_package() |> elem(0)
 
   def bits_to_int(bits) do

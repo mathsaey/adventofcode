@@ -45,7 +45,7 @@ aoc 2020, 16 do
   # -------
 
   def parse(string) do
-    [constraints, mine, nearby] = string |> String.trim() |> String.split("\n\n")
+    [constraints, mine, nearby] = string |> String.split("\n\n")
     {parse_constraints(constraints), parse_mine(mine), parse_nearby(nearby)}
   end
 

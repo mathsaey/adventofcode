@@ -4,8 +4,6 @@ aoc 2021, 20 do
   def p1, do: input_string() |> solve(2)
   def p2, do: input_string() |> solve(50)
 
-  def input_string, do: super() |> String.trim()
-
   def solve(str, n) do
     {iea, img} = parse(str)
     img

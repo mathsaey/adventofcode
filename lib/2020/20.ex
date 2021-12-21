@@ -172,7 +172,6 @@ aoc 2020, 20 do
 
   def parse do
     input_string()
-    |> String.trim()
     |> String.split("\n\n")
     |> Enum.map(&parse_tile/1)
     |> Map.new()

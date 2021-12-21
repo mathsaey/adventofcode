@@ -1,10 +1,8 @@
 import AOC
 
 aoc 2019, 2 do
-
   def pre do
     input_string()
-    |> String.trim()
     |> String.split(",")
     |> Enum.map(&String.to_integer/1)
     |> :array.from_list()
