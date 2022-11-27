@@ -33,7 +33,7 @@ aoc 2021, 11 do
 
   def step(map), do: map |> increase_all() |> flash() |> reset()
 
-  def increase_all(map), do: map |> Map.map(fn {_, v} -> v + 1 end)
+  def increase_all(map), do: map |> Map.new(fn {k, v} -> {k, v + 1} end)
 
   def flash(map) do
     keys = map |> Enum.filter(fn {_, v} -> v != :flash and v > 9 end) |> Enum.map(&elem(&1, 0))
@@ -54,5 +54,5 @@ aoc 2021, 11 do
   def inc(:flash), do: :flash
   def inc(x), do: x + 1
 
-  def reset(map), do: map |> Map.map(fn {_, v} -> if(v > 9, do: 0, else: v) end)
+  def reset(map), do: map |> Map.new(fn {k, v} -> {k, if(v > 9, do: 0, else: v)} end)
 end

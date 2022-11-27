@@ -1,7 +1,7 @@
 import AOC
 
 aoc 2020, 14 do
-  use Bitwise
+  import Bitwise
 
   def p1, do: run(&p1/2)
   def p1({:msk, msk}, {mem, _}), do: {mem, msk}
