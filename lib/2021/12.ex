@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 12 do
-  @ascii_upper 41..90
-  @ascii_lower 97..122
+  @ascii_upper ?A..?Z
+  @ascii_lower ?a..?z
 
   def parse(stream) do
     stream
