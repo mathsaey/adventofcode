@@ -1,6 +1,6 @@
 %{
-  "advent_of_code_utils": {:hex, :advent_of_code_utils, "2.0.1", "8b8887f766df0890758860e47fcc8608f3aaee5a1ed2c95c264b883f6e7b2bdc", [:mix], [{:floki, "~> 0.33.0", [hex: :floki, repo: "hexpm", optional: false]}], "hexpm", "5730e1007d62f6129bea02849997a9fa0fe63befc61bb5dc07291efa6e96d815"},
-  "floki": {:hex, :floki, "0.33.1", "f20f1eb471e726342b45ccb68edb9486729e7df94da403936ea94a794f072781", [:mix], [{:html_entities, "~> 0.5.0", [hex: :html_entities, repo: "hexpm", optional: false]}], "hexpm", "461035fd125f13fdf30f243c85a0b1e50afbec876cbf1ceefe6fddd2e6d712c6"},
+  "advent_of_code_utils": {:hex, :advent_of_code_utils, "3.0.0", "055e1e0b9019f63c8206fd0da2bd86d5049a60f9f801b250a996613b3e6b9de0", [:mix], [{:floki, "~> 0.34", [hex: :floki, repo: "hexpm", optional: false]}], "hexpm", "087f5b62e7bb913e226bd16a464e322a891f38599095f2d99fa9244603e68680"},
+  "floki": {:hex, :floki, "0.34.0", "002d0cc194b48794d74711731db004fafeb328fe676976f160685262d43706a8", [:mix], [], "hexpm", "9c3a9f43f40dde00332a589bd9d389b90c1f518aef500364d00636acc5ebc99c"},
   "heap": {:hex, :heap, "2.0.2", "d98cb178286cfeb5edbcf17785e2d20af73ca57b5a2cf4af584118afbcf917eb", [:mix], [], "hexpm", "ba9ea2fe99eb4bcbd9a8a28eaf71cbcac449ca1d8e71731596aace9028c9d429"},
   "html_entities": {:hex, :html_entities, "0.5.2", "9e47e70598da7de2a9ff6af8758399251db6dbb7eebe2b013f2bbd2515895c3c", [:mix], [], "hexpm", "c53ba390403485615623b9531e97696f076ed415e8d8058b1dbaa28181f4fdcc"},
 }
