@@ -5,7 +5,7 @@ aoc 2022, 4 do
   def p2(input), do: solve(input, fn {l, r} -> not Range.disjoint?(l, r) end)
 
   def solve(input, filter) do
-    input |> String.split("\n") |> Enum.map(&parse_line/1) |> Enum.filter(filter) |> Enum.count()
+    input |> String.split("\n") |> Enum.map(&parse_line/1) |> Enum.count(filter)
   end
 
   def contained?(f1..t1, f2..t2), do: f1 >= f2 and t1 <= t2
