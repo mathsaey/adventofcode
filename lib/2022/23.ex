@@ -48,10 +48,10 @@ aoc 2022, 23 do
     for nx <- (x - 1)..(x + 1), ny <- (y - 1)..(y + 1), {nx, ny} != {x, y}, do: {nx, ny}
   end
 
-  def neighbours_at(:north, {x, y}), do: for x <- (x - 1)..(x + 1), do: {x, y - 1}
-  def neighbours_at(:south, {x, y}), do: for x <- (x - 1)..(x + 1), do: {x, y + 1}
-  def neighbours_at(:west, {x, y}), do: for y <- (y - 1)..(y + 1), do: {x - 1, y}
-  def neighbours_at(:east, {x, y}), do: for y <- (y - 1)..(y + 1), do: {x + 1, y}
+  def neighbours_at(:north, {x, y}), do: for(x <- (x - 1)..(x + 1), do: {x, y - 1})
+  def neighbours_at(:south, {x, y}), do: for(x <- (x - 1)..(x + 1), do: {x, y + 1})
+  def neighbours_at(:west, {x, y}), do: for(y <- (y - 1)..(y + 1), do: {x - 1, y})
+  def neighbours_at(:east, {x, y}), do: for(y <- (y - 1)..(y + 1), do: {x + 1, y})
 
   def parse(input) do
     input

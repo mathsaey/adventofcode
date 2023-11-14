@@ -46,7 +46,7 @@ aoc 2021, 11 do
     coord |> adjacent() |> Enum.reduce(map, &increase/2)
   end
 
-  def adjacent({x, y}), do: for x <- (x - 1)..(x + 1), y <- (y - 1)..(y + 1), do: {x, y}
+  def adjacent({x, y}), do: for(x <- (x - 1)..(x + 1), y <- (y - 1)..(y + 1), do: {x, y})
 
   def increase(coord, map) when is_map_key(map, coord), do: %{map | coord => inc(map[coord])}
   def increase(_, map), do: map

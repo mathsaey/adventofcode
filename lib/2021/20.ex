@@ -38,7 +38,7 @@ aoc 2021, 20 do
     |> Integer.undigits(2)
   end
 
-  def square({x, y}), do: for y <- y-1..y+1, x <- x-1..x+1, do: {x, y}
+  def square({x, y}), do: for(y <- y-1..y+1, x <- x-1..x+1, do: {x, y})
 
   def parse(string) do
     [iea, img] = String.split(string, "\n\n")

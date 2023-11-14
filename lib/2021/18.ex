@@ -11,7 +11,7 @@ aoc 2021, 18 do
     |> Enum.max()
   end
 
-  def pairs(stream), do: for i <- stream, j <- stream, i != j, do: {i, j}
+  def pairs(stream), do: for(i <- stream, j <- stream, i != j, do: {i, j})
 
   def parse(stream), do: stream |> Stream.map(&parse(&1,[]))
 

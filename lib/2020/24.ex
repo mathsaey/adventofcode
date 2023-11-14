@@ -9,7 +9,7 @@ aoc 2020, 24 do
 
   def initial, do: parse() |> Stream.map(&path_to_coord/1) |> Enum.reduce(MapSet.new(), &flip/2)
 
-  def flip(c, s), do: if c in s, do: MapSet.delete(s, c), else: MapSet.put(s, c)
+  def flip(c, s), do: if(c in s, do: MapSet.delete(s, c), else: MapSet.put(s, c))
   def flipped(c, s), do: c |> adjacent() |> Enum.count(&(&1 in s))
 
   def days(flipped, 0), do: flipped

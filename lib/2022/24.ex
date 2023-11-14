@@ -54,10 +54,10 @@ aoc 2022, 24 do
     |> List.to_tuple()
   end
 
-  def next({x, y}, :down, {_, b = m.._, _, _}), do: if y + 1 in b, do: {x, y + 1}, else: {x, m}
-  def next({x, y}, :up, {_, b = _..m, _, _}), do: if y - 1 in b, do: {x, y - 1}, else: {x, m}
-  def next({x, y}, :left, {b = _..m, _, _, _}), do: if x - 1 in b, do: {x - 1, y}, else: {m, y}
-  def next({x, y}, :right, {b = m.._, _, _, _}), do: if x + 1 in b, do: {x + 1, y}, else: {m, y}
+  def next({x, y}, :down, {_, b = m.._, _, _}), do: if(y + 1 in b, do: {x, y + 1}, else: {x, m})
+  def next({x, y}, :up, {_, b = _..m, _, _}), do: if(y - 1 in b, do: {x, y - 1}, else: {x, m})
+  def next({x, y}, :left, {b = _..m, _, _, _}), do: if(x - 1 in b, do: {x - 1, y}, else: {m, y})
+  def next({x, y}, :right, {b = m.._, _, _, _}), do: if(x + 1 in b, do: {x + 1, y}, else: {m, y})
 
   def bounds(map) do
     {max_x, max_y} = map |> Map.keys() |> Enum.max()
