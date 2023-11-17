@@ -1,11 +1,12 @@
 import AOC
 
 aoc 2019, 1 do
-  def p1, do: p(&fuel/1)
-  def p2, do: p(&total_fuel/1)
+  def p1(input), do: p(input, &fuel/1)
+  def p2(input), do: p(input, &total_fuel/1)
 
-  def p(f) do
-    input_stream()
+  def p(input, f) do
+    input
+    |> String.split("\n")
     |> Stream.map(&String.to_integer/1)
     |> Stream.map(f)
     |> Enum.sum()

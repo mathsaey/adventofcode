@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2019, 4 do
-  def range do
-    [from, to] = input_string() |> String.split("-") |> Enum.map(&String.to_integer/1)
+  def range(input) do
+    [from, to] = input |> String.split("-") |> Enum.map(&String.to_integer/1)
     from..to
   end
 
@@ -13,14 +13,16 @@ aoc 2019, 4 do
     |> length()
   end
 
-  def p1 do
-    range()
+  def p1(input) do
+    input
+    |> range()
     |> Stream.map(&(adjacent_digits(&1) and digits_increase(&1)))
     |> post()
   end
 
-  def p2 do
-    range()
+  def p2(input) do
+    input
+    |> range()
     |> Stream.map(&(adjacent_double_digits(&1) and digits_increase(&1)))
     |> post()
   end

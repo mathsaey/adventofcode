@@ -1,8 +1,9 @@
 import AOC
 
 aoc 2018, 4 do
-  def get do
-    input_stream()
+  def get(input) do
+    input
+    |> String.split("\n")
     |> Enum.sort()
     |> Stream.map(&Regex.scan(~r/\[1518-(\d\d)-(\d\d) (\d\d):(\d\d)\] (.*)/, &1))
     |> Stream.map(&tl(hd(&1)))
@@ -38,27 +39,27 @@ aoc 2018, 4 do
     {:guard, String.to_integer(id)}
   end
 
-  def p1 do
+  def p1(input) do
     id =
-      get()
+      get(input)
       |> Enum.map(fn {id, map} -> {id, Enum.sum(Map.values(map))} end)
       |> Enum.max_by(&elem(&1, 1))
       |> elem(0)
     min =
-      get()[id]
+      get(input)[id]
       |> Enum.max_by(&elem(&1, 1))
       |> elem(0)
     id * min
   end
 
-  def p2 do
+  def p2(input) do
     id =
-      get()
+      get(input)
       |> Enum.map(fn {id, map} -> {id, Enum.max_by(map, &elem(&1, 1))} end)
       |> Enum.max_by(fn {_, {_, x}} -> x end)
       |> elem(0)
     min =
-      get()[id]
+      get(input)[id]
       |> Enum.max_by(&elem(&1, 1))
       |> elem(0)
     id * min

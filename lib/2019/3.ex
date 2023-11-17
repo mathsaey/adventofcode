@@ -1,19 +1,19 @@
 import AOC
 
 aoc 2019, 3 do
-  def pre, do: input_string() |> String.split() |> Enum.map(&process_path/1)
+  def pre(input), do: input |> String.split() |> Enum.map(&process_path/1)
 
-  def p1 do
-    [s1, s2] = pre() |> Enum.map(&MapSet.new/1)
+  def p1(input) do
+    [s1, s2] = input |> pre() |> Enum.map(&MapSet.new/1)
     MapSet.intersection(s1, s2) |> Enum.map(&manhattan_distance/1) |> Enum.min()
   end
 
-  def p2 do
-    [m1, m2] = pre() |> Enum.map(&to_map/1)
+  def p2(input) do
+    [m1, m2] = input |> pre() |> Enum.map(&to_map/1)
     merged = Map.merge(m1, m2, fn _, v1, v2 -> v1 + v2 end)
 
     # Figure out crossings as in p1
-    [s1, s2] = pre() |> Enum.map(&MapSet.new/1)
+    [s1, s2] = input |> pre() |> Enum.map(&MapSet.new/1)
     intersections = MapSet.intersection(s1, s2)
 
     # Convert them to distances, find one with least amount of steps

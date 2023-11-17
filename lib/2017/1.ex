@@ -1,4 +1,6 @@
 defmodule Y2017.D1 do
+  def p1(str) when is_binary(str), do: str |> String.to_integer() |> p1()
+
   def p1(int) when is_integer(int), do: Integer.digits(int) |> p1() |> Enum.sum()
 
   def p1(lst), do: p1(lst, List.last(lst))
@@ -7,6 +9,8 @@ defmodule Y2017.D1 do
 
   def p1([hd | tl], prev) when hd == prev, do: [prev | p1(tl, hd)]
   def p1([hd | tl], _), do: p1(tl, hd)
+
+  def p2(str) when is_binary(str), do: str |> String.to_integer() |> p2()
 
   def p2(int) when is_integer(int), do: Integer.digits(int) |> p2() |> Enum.sum()
 

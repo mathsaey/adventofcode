@@ -1,23 +1,24 @@
 import AOC
 
 aoc 2019, 2 do
-  def pre do
-    input_string()
+  def pre(input) do
+    input
     |> String.split(",")
     |> Enum.map(&String.to_integer/1)
     |> :array.from_list()
     |> :array.fix()
   end
 
-  def p1 do
-    pre()
+  def p1(input) do
+    input
+    |> pre()
     |> replace(12, 2)
     |> execute()
     |> first()
   end
 
-  def p2 do
-    arr = pre()
+  def p2(input) do
+    arr = pre(input)
     input_combinations()
     |> Task.async_stream(fn {n, v} -> try(n, v, arr) end)
     |> Stream.map(&elem(&1, 1))

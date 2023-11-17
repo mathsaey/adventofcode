@@ -1,23 +1,25 @@
 import AOC, only: :macros
 
 aoc 2018, 5 do
-  def get() do
-    input_stream()
+  def get(input) do
+    input
+    |> String.split("\n")
     |> Stream.take(1)
     |> Enum.to_list()
     |> hd()
     |> String.codepoints()
   end
 
-  def p1() do
-    get()
+  def p1(input) do
+    input
+    |> get()
     |> collapse(true)
     |> length()
   end
 
-  def p2() do
+  def p2(input) do
     # Start out from the collapsed list to cut down on execution time
-    collapsed = collapse(get(), true)
+    collapsed = collapse(get(input), true)
 
     collapsed
     |> Enum.reduce(MapSet.new(), fn el, acc -> MapSet.put(acc, String.downcase(el)) end)

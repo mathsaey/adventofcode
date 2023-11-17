@@ -21,8 +21,9 @@ aoc 2018, 3 do
     end
   end
 
-  def claims do
-    input_stream()
+  def claims(input) do
+    input
+    |> String.split("\n")
     |> Stream.map(&Regex.scan(~r/#(\d+) @ (\d+),(\d+): (\d+)x(\d+)/, &1))
     |> Stream.map(&tl(hd(&1)))
     |> Stream.map(fn line -> Enum.map(line, &String.to_integer/1) end)
@@ -30,20 +31,21 @@ aoc 2018, 3 do
     |> Map.values()
   end
 
-  def p1 do
-    claims()
+  def p1(input) do
+    input
+    |> claims()
     |> Enum.filter(&(length(&1) > 1))
     |> length()
   end
 
-  def p2 do
+  def p2(input) do
     ids = Enum.reduce(
-      claims(),
+      claims(input),
       MapSet.new(),
       fn ids, set -> Enum.reduce(ids, set, &MapSet.put(&2, &1)) end
     )
 
-    res = Enum.reduce(claims(), ids, fn
+    res = Enum.reduce(claims(input), ids, fn
       [], set -> set
       [_], set -> set
       lst, set -> Enum.reduce(lst, set, &MapSet.delete(&2, &1))
