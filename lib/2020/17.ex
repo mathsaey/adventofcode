@@ -1,10 +1,12 @@
 import AOC
 
 aoc 2020, 17 do
-  def p1, do: run(3)
-  def p2, do: run(4)
+  def p1(input), do: run(input, 3)
+  def p2(input), do: run(input, 4)
 
-  def run(dimensions), do: parse() |> dimensions(dimensions) |> turns(6) |> Enum.count()
+  def run(input, dimensions) do
+    input |> parse() |> dimensions(dimensions) |> turns(6) |> Enum.count()
+  end
 
   def turns(active, 0), do: active
   def turns(active, n), do: active |> turn() |> turns(n - 1)
@@ -49,8 +51,9 @@ aoc 2020, 17 do
   def dimensions({x, y}, 3), do: {x, y, 0}
   def dimensions({x, y}, 4), do: {x, y, 0, 0}
 
-  def parse do
-    input_stream()
+  def parse(input) do
+    input
+    |> String.split("\n")
     |> Enum.map(&String.graphemes/1)
     |> Enum.with_index()
     |> Enum.reduce([], &parse_row/2)

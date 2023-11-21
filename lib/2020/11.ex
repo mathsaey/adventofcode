@@ -1,11 +1,12 @@
 import AOC
 
 aoc 2020, 11 do
-  def p1, do: solve(&adjacent/2, 4)
-  def p2, do: solve(&visible/2, 5)
+  def p1(input), do: solve(input, &adjacent/2, 4)
+  def p2(input), do: solve(input, &visible/2, 5)
 
-  def parse do
-    input_stream()
+  def parse(input) do
+    input
+    |> String.split("\n")
     |> Stream.map(&String.graphemes/1)
     |> Stream.map(&Stream.with_index/1)
     |> Stream.with_index()
@@ -14,8 +15,8 @@ aoc 2020, 11 do
     |> Map.new()
   end
 
-  def solve(search, allowed) do
-    parse() |> run(search, allowed) |> Map.values() |> Enum.count(&(&1 == "#"))
+  def solve(input, search, allowed) do
+    input |> parse() |> run(search, allowed) |> Map.values() |> Enum.count(&(&1 == "#"))
   end
 
   def run(prev, search, allowed) do

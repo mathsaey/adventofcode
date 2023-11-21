@@ -1,10 +1,10 @@
 import AOC
 
 aoc 2021, 14 do
-  def p1, do: solve(10)
-  def p2, do: solve(40)
+  def p1(input), do: solve(input, 10)
+  def p2(input), do: solve(input, 40)
 
-  def solve(n), do: input_string() |> parse() |> step_n_times(n) |> count()
+  def solve(input, n), do: input |> parse() |> step_n_times(n) |> count()
 
   def parse(string) do
     [template, rules] = String.split(string, "\n\n")

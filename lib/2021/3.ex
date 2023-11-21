@@ -1,19 +1,20 @@
 import AOC
 
 aoc 2021, 3 do
-  def input_stream, do: super() |> parse()
+  def p1(input), do: solve(input, &gamma/1, &epsilon/1)
+  def p2(input), do: solve(input, &oxygen/1, &scrubber/1)
 
-  def p1, do: solve(&gamma/1, &epsilon/1)
-  def p2, do: solve(&oxygen/1, &scrubber/1)
-
-  defp solve(lhs_fun, rhs_fun) do
-    lhs = lhs_fun.(input_stream())
-    rhs = rhs_fun.(input_stream())
+  defp solve(input, lhs_fun, rhs_fun) do
+    stream = parse(input)
+    lhs = lhs_fun.(stream)
+    rhs = rhs_fun.(stream)
     dec(lhs) * dec(rhs)
   end
 
-  defp parse(stream) do
-    Stream.map(stream, fn str ->
+  defp parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(fn str ->
       str |> String.graphemes() |> Enum.map(&String.to_integer/1)
     end)
   end

@@ -1,21 +1,28 @@
 import AOC
 
 aoc 2020, 21 do
-  def p1 do
-    forbidden = allergen_ingredients() |> Map.values() |> Enum.reduce(&MapSet.union/2)
-    parse() |> Stream.map(&elem(&1, 0)) |> Stream.concat() |> Enum.count(&(&1 not in forbidden))
+  def p1(input) do
+    forbidden = input |> allergen_ingredients() |> Map.values() |> Enum.reduce(&MapSet.union/2)
+
+    input
+    |> parse()
+    |> Stream.map(&elem(&1, 0))
+    |> Stream.concat()
+    |> Enum.count(&(&1 not in forbidden))
   end
 
-  def p2 do
-    allergen_ingredients()
+  def p2(input) do
+    input
+    |> allergen_ingredients()
     |> eliminate()
     |> Enum.sort_by(&elem(&1, 0))
     |> Enum.map(fn {_, s} -> s |> MapSet.to_list() |> hd() end)
     |> Enum.join(",")
   end
 
-  def allergen_ingredients do
-    parse()
+  def allergen_ingredients(input) do
+    input
+    |> parse()
     |> Stream.map(&candidates/1)
     |> Enum.reduce(&merge/2)
   end
@@ -43,7 +50,7 @@ aoc 2020, 21 do
     for allergen <- allergens, into: %{}, do: {allergen, MapSet.new(ingredients)}
   end
 
-  def parse, do: input_stream() |> Stream.map(&parse_line/1)
+  def parse(input), do: input |> String.split("\n") |> Stream.map(&parse_line/1)
 
   def parse_line(str) do
     [_, ingredients, allergens] = Regex.run(~r/(.+) \(contains (.+)\)/, str)

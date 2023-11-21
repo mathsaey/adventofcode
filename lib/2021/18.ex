@@ -1,10 +1,13 @@
 import AOC
 
 aoc 2021, 18 do
-  def p1, do: input_stream() |> parse() |> Enum.reduce(&add(&2, &1)) |> magnitude()
+  def p1(input) do
+    input |> String.split("\n") |> parse() |> Enum.reduce(&add(&2, &1)) |> magnitude()
+  end
 
-  def p2 do
-    input_stream()
+  def p2(input) do
+    input
+    |> String.split("\n")
     |> parse()
     |> pairs()
     |> Stream.map(fn {l, r} -> add(l, r) |> magnitude() end)

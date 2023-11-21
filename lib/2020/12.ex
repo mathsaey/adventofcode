@@ -1,13 +1,15 @@
 import AOC
 
 aoc 2020, 12 do
-  def p1, do: solve({0, 0, 90}, &move_p1/2)
-  def p2, do: solve({{0, 0}, {10, 1}}, &move_p2/2)
+  def p1(input), do: solve(input, {0, 0, 90}, &move_p1/2)
+  def p2(input), do: solve(input, {{0, 0}, {10, 1}}, &move_p2/2)
 
-  def solve(initial, move), do: parse() |> track(initial, move) |> manhattan_distance()
+  def solve(input, initial, move) do
+    input |> parse() |> track(initial, move) |> manhattan_distance()
+  end
 
-  def parse, do: input_stream() |> Enum.map(&parse/1)
-  def parse(<<action, rest::binary>>), do: {action, String.to_integer(rest)}
+  def parse(input), do: input |> String.split("\n") |> Enum.map(&parse_line/1)
+  def parse_line(<<action, rest::binary>>), do: {action, String.to_integer(rest)}
 
   def manhattan_distance({e, n, _}), do: abs(e) + abs(n)
   def manhattan_distance({{e, n}, _}), do: abs(e) + abs(n)

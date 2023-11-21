@@ -1,13 +1,13 @@
 import AOC
 
 aoc 2020, 16 do
-  def p1 do
-    {constraints, _, nearby} = parse(input_string())
+  def p1(input) do
+    {constraints, _, nearby} = parse(input)
     nearby |> Enum.flat_map(fn t -> Enum.reject(t, &valid?(&1, constraints)) end) |> Enum.sum()
   end
 
-  def p2 do
-    {constraints, mine, nearby} = parse(input_string())
+  def p2(input) do
+    {constraints, mine, nearby} = parse(input)
 
     nearby
     |> Enum.filter(fn t -> Enum.all?(t, &valid?(&1, constraints)) end)
@@ -44,8 +44,8 @@ aoc 2020, 16 do
   # Parsing
   # -------
 
-  def parse(string) do
-    [constraints, mine, nearby] = string |> String.split("\n\n")
+  def parse(input) do
+    [constraints, mine, nearby] = input |> String.split("\n\n")
     {parse_constraints(constraints), parse_mine(mine), parse_nearby(nearby)}
   end
 

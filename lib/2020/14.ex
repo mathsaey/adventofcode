@@ -3,17 +3,19 @@ import AOC
 aoc 2020, 14 do
   import Bitwise
 
-  def p1, do: run(&p1/2)
+  def p1(input), do: run(input, &p1/2)
   def p1({:msk, msk}, {mem, _}), do: {mem, msk}
   def p1({:mem, k, v}, {mem, msk}), do: {Map.put(mem, k, mask_val(v, msk)), msk}
 
-  def p2, do: run(&p2/2)
+  def p2(input), do: run(input, &p2/2)
   def p2({:msk, msk}, {mem, _}), do: {mem, msk}
   def p2({:mem, k, v}, {mem, msk}) do
     {k |> mask_addr(msk) |> Enum.reduce(mem, &Map.put(&2, &1, v)), msk}
   end
 
-  def run(f), do: parse() |> Enum.reduce({%{}, nil}, f) |> elem(0) |> Map.values() |> Enum.sum()
+  def run(input, f) do
+    input |> parse() |> Enum.reduce({%{}, nil}, f) |> elem(0) |> Map.values() |> Enum.sum()
+  end
 
   def mask(v, m, maskfn, postfn) do
     v |> int_to_binlst() |> pad() |> Enum.zip(m) |> Enum.map(maskfn) |> postfn.()
@@ -43,7 +45,7 @@ aoc 2020, 14 do
   # Parsing
   # -------
 
-  def parse(), do: input_stream() |> Enum.map(&entry/1)
+  def parse(input), do: input |> String.split("\n") |> Enum.map(&entry/1)
 
   def entry(<<"mask = ", mask::binary>>), do: {:msk, parse_mask(mask)}
 

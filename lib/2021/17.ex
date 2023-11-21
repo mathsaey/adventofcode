@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 17 do
-  def p1 do
-    {_, y1.._} = input_string() |> parse()
+  def p1(input) do
+    {_, y1.._} = parse(input)
     # We are looking for the highest possible throw => positive y, independent of chosen x
     # Ball falls with same velocity as going up.
     # Fastest fall speed => from 0 to y (bottom of target) in one step, otherwise we miss.
@@ -14,8 +14,8 @@ aoc 2021, 17 do
     div(y1 * (y1 + 1), 2)
   end
 
-  def p2 do
-    target = input_string() |> parse()
+  def p2(input) do
+    target = parse(input)
     target
     |> candidates()
     |> Stream.map(&path(&1, target))

@@ -1,16 +1,17 @@
 import AOC
 
 aoc 2021, 4 do
-  def p1, do: {boards(), marked()} |> find(&first_winner/3) |> score()
-  def p2, do: {boards(), marked()} |> find(&last_winner/3) |> score()
+  def p1(input), do: {boards(input), marked(input)} |> find(&first_winner/3) |> score()
+  def p2(input), do: {boards(input), marked(input)} |> find(&last_winner/3) |> score()
 
-  def boards do
-    input_string() |> String.split("\n\n") |> Enum.drop(1) |> Enum.map(&parse_board/1)
+  def boards(input) do
+    input |> String.split("\n\n") |> Enum.drop(1) |> Enum.map(&parse_board/1)
   end
 
-  def marked do
-    input_stream()
-    |> Stream.take(1)
+  def marked(input) do
+    input
+    |> String.split("\n")
+    |> Enum.take(1)
     |> Enum.to_list()
     |> hd()
     |> String.split(",")

@@ -1,17 +1,19 @@
 import AOC
 
 aoc 2021, 5 do
-  def p1 do
-    input_stream()
+  def p1(input) do
+    input
     |> parse()
     |> Stream.filter(fn {{x1, y1}, {x2, y2}} -> x1 == x2 or y1 == y2 end)
     |> count_overlaps()
   end
 
-  def p2, do: input_stream() |> parse() |> count_overlaps()
+  def p2(input), do: input |> parse() |> count_overlaps()
 
-  def parse(stream) do
-    Stream.map(stream, fn line ->
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(fn line ->
       [x1, y1, x2, y2] =
         line
         |> String.split(" -> ")

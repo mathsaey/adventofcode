@@ -1,15 +1,22 @@
 import AOC
 
 aoc 2020, 23 do
-  def input, do: input_string() |> String.to_integer() |> Integer.digits()
+  def parse(input), do: input |> String.to_integer() |> Integer.digits()
 
-  def p1 do
-    max = input() |> Enum.max()
-    input() |> from_list() |> n_turns(100, max) |> to_list(1) |> tl() |> Integer.undigits()
+  def p1(input) do
+    max = input |> parse() |> Enum.max()
+
+    input
+    |> parse()
+    |> from_list()
+    |> n_turns(100, max)
+    |> to_list(1)
+    |> tl()
+    |> Integer.undigits()
   end
 
-  def p2 do
-    input = input()
+  def p2(input) do
+    input = parse(input)
     last = List.last(input)
     max = Enum.max(input)
     map = from_list(input)

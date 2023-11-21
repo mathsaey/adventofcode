@@ -3,9 +3,8 @@ import AOC
 aoc 2020, 22 do
   import Kernel, except: [round: 1]
 
-  def p1, do: parse() |> play()
-
-  def p2, do: parse() |> game() |> elem(1) |> score()
+  def p1(input), do: input |> parse() |> play()
+  def p2(input), do: input |> parse() |> game() |> elem(1) |> score()
 
   def play({[], l}), do: score(l)
   def play({l, []}), do: score(l)
@@ -49,8 +48,8 @@ aoc 2020, 22 do
     |> elem(1)
   end
 
-  def parse do
-    [p1, p2] = input_string() |> String.split("\n\n") |> Enum.map(&parse_player/1)
+  def parse(input) do
+    [p1, p2] = input |> String.split("\n\n") |> Enum.map(&parse_player/1)
     {p1, p2}
   end
 

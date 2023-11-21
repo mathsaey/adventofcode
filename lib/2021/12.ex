@@ -4,8 +4,9 @@ aoc 2021, 12 do
   @ascii_upper ?A..?Z
   @ascii_lower ?a..?z
 
-  def parse(stream) do
-    stream
+  def parse(input) do
+    input
+    |> String.split("\n")
     |> Stream.flat_map(fn str ->
       [l, r] = String.split(str, "-")
       l = parse_cave(l)
@@ -53,6 +54,6 @@ aoc 2021, 12 do
     end
   end
 
-  def p1, do: input_stream() |> parse() |> all_paths(true) |> length()
-  def p2, do: input_stream() |> parse() |> all_paths(false) |> Enum.uniq() |> length()
+  def p1(input), do: input |> parse() |> all_paths(true) |> length()
+  def p2(input), do: input |> parse() |> all_paths(false) |> Enum.uniq() |> length()
 end

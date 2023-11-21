@@ -1,8 +1,9 @@
 import AOC
 
 aoc 2021, 10 do
-  def p1 do
-    input_stream()
+  def p1(input) do
+    input
+    |> String.split("\n")
     |> Stream.map(&parse/1)
     |> Stream.filter(&corrupted?/1)
     |> Stream.map(&hd/1)
@@ -11,8 +12,9 @@ aoc 2021, 10 do
     |> Enum.sum()
   end
 
-  def p2 do
-    input_stream()
+  def p2(input) do
+    input
+    |> String.split("\n")
     |> Stream.map(&parse/1)
     |> Stream.reject(&corrupted?/1)
     |> Stream.map(fn [{:remaining, lst}] -> lst end)

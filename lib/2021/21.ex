@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 21 do
-  def p1 do
-    {p1, p2} = input_string() |> parse()
+  def p1(input) do
+    {p1, p2} = parse(input)
 
     1..100
     |> Stream.cycle()
@@ -18,7 +18,7 @@ aoc 2021, 21 do
     |> then(fn {rolls, score} -> rolls * score end)
   end
 
-  def p2, do: input_string() |> parse() |> turn() |> Tuple.to_list() |> Enum.max()
+  def p2(input), do: input |> parse() |> turn() |> Tuple.to_list() |> Enum.max()
 
   @moves for(f <- 1..3, s <- 1..3, t <- 1..3, do: f + s + t)
   |> Enum.frequencies()

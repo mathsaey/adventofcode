@@ -1,10 +1,10 @@
 import AOC
 
 aoc 2020, 5 do
-  def p1, do: input_stream() |> Stream.map(&id/1) |> Enum.max()
+  def p1(input), do: input |> String.split("\n") |> Enum.map(&id/1) |> Enum.max()
 
-  def p2 do
-    ids = input_stream() |> Stream.map(&id/1) |> MapSet.new()
+  def p2(input) do
+    ids = input |> String.split("\n") |> Enum.map(&id/1) |> MapSet.new()
     0..(127 * 8 + 8) |> Enum.find(&(&1 not in ids and (&1 - 1) in ids and (&1 + 1) in ids))
   end
 

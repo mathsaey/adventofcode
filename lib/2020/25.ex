@@ -3,8 +3,8 @@ import AOC
 aoc 2020, 25 do
   @magic_number 20201227
 
-  def p1 do
-    [card, door] = parse()
+  def p1(input) do
+    [card, door] = parse(input)
     card_loop_size = find_loop_size(card)
     priv_key(door, card_loop_size)
   end
@@ -28,7 +28,7 @@ aoc 2020, 25 do
   def steps(subject), do: Stream.iterate(1, &step(&1, subject))
   def step(val, subject), do: rem(val * subject, @magic_number)
 
-  def parse do
-    input_string() |> String.split("\n") |> Enum.map(&String.to_integer/1)
+  def parse(input) do
+    input |> String.split("\n") |> Enum.map(&String.to_integer/1)
   end
 end

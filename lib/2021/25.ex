@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 25 do
-  def p1 do
-    input_stream()
+  def p1(input) do
+    input
     |> parse()
     |> Stream.iterate(&step/1)
     |> Stream.chunk_every(2, 1)
@@ -29,10 +29,12 @@ aoc 2021, 25 do
   def next({{x, y}, :east}, {max_x, _}), do: {rem(x + 1, max_x), y}
   def next({{x, y}, :south}, {_, max_y}), do: {x, rem(y + 1, max_y)}
 
-  def parse(stream) do
-    stream
-    |> Stream.with_index()
-    |> Stream.flat_map(fn {str, y} ->
+  def parse(input) do
+    lst = String.split(input, "\n")
+
+    lst
+    |> Enum.with_index()
+    |> Enum.flat_map(fn {str, y} ->
       str
       |> String.codepoints()
       |> Enum.with_index()
@@ -43,11 +45,11 @@ aoc 2021, 25 do
       end)
     end)
     |> Map.new()
-    |> then(&{bounds(stream), &1})
+    |> then(&{bounds(lst), &1})
   end
 
-  def bounds(stream) do
-    {last, y} = stream |> Stream.with_index() |> Enum.max_by(&elem(&1, 1))
+  def bounds(lst) do
+    {last, y} = lst |> Enum.with_index() |> Enum.max_by(&elem(&1, 1))
     x = String.length(last) - 1
     {x + 1, y + 1}
   end

@@ -1,11 +1,11 @@
 import AOC
 
 aoc 2021, 7 do
-  def p1, do: solve(input(), &p1_fuel/2)
-  def p2, do: solve(input(), &p2_fuel/2)
+  def p1(input), do: input |> parse() |> solve(&p1_fuel/2)
+  def p2(input), do: input |> parse() |> solve(&p2_fuel/2)
 
-  def input do
-    input_string() |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
+  def parse(input) do
+    input |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
   end
 
   def solve(crabs, fuel_fn) do

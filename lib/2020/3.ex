@@ -1,16 +1,17 @@
 import AOC
 
 aoc 2020, 3 do
-  def p1, do: slope(input_stream(), 3, 1)
+  def p1(input), do: slope(input, 3, 1)
 
-  def p2 do
+  def p2(input) do
     [{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}]
-    |> Enum.map(fn {right, down} -> slope(input_stream(), right, down) end)
+    |> Enum.map(fn {right, down} -> slope(input, right, down) end)
     |> Enum.reduce(1, &(&1 * &2))
   end
 
-  def slope(stream, right, down) do
-    stream
+  def slope(input, right, down) do
+    input
+    |> String.split("\n")
     |> Stream.map(&String.graphemes/1)
     |> Stream.map(&Stream.cycle/1)
     |> Stream.transform({0, 1}, fn

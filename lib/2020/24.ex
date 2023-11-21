@@ -4,10 +4,12 @@ aoc 2020, 24 do
   # https://www.redblobgames.com/grids/hexagons/
   # Took over most of the game of life logic from day 17
 
-  def p1, do: initial() |> MapSet.size()
-  def p2, do: initial() |> days(100) |> MapSet.size()
+  def p1(input), do: input |> initial() |> MapSet.size()
+  def p2(input), do: input |> initial() |> days(100) |> MapSet.size()
 
-  def initial, do: parse() |> Stream.map(&path_to_coord/1) |> Enum.reduce(MapSet.new(), &flip/2)
+  def initial(input) do
+    input |> parse() |> Stream.map(&path_to_coord/1) |> Enum.reduce(MapSet.new(), &flip/2)
+  end
 
   def flip(c, s), do: if(c in s, do: MapSet.delete(s, c), else: MapSet.put(s, c))
   def flipped(c, s), do: c |> adjacent() |> Enum.count(&(&1 in s))
@@ -50,7 +52,7 @@ aoc 2020, 24 do
     end)
   end
 
-  def parse, do: input_stream() |> Stream.map(&parse_line/1)
+  def parse(input), do: input |> String.split("\n") |> Stream.map(&parse_line/1)
 
   def parse_line(""), do: []
   def parse_line(<<"e", rest::binary>>), do: [:e | parse_line(rest)]

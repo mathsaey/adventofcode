@@ -1,7 +1,7 @@
 import AOC
 
 aoc 2020, 18 do
-  def p1, do: run(&p1/1)
+  def p1(input) when is_binary(input), do: run(input, &p1/1)
 
   def p1(lst), do: p1(lst, [nil])
   def p1([], [es]), do: es
@@ -11,7 +11,7 @@ aoc 2020, 18 do
   def p1([lhs | tl], [nil | es]), do: p1(tl, [lhs | es])
   def p1([rhs | tl], [[op, lhs] | es]), do: p1(tl, [[op, lhs, rhs] | es])
 
-  def p2, do: run(&p2/1)
+  def p2(input) when is_binary(input), do: run(input, &p2/1)
 
   def p2(lst), do: p2(lst, [])
   # stop when we are left with a single expression
@@ -31,8 +31,13 @@ aoc 2020, 18 do
   # Shift in every other case
   def p2([hd | tl], es), do: p2(tl, [hd | es])
 
-  def run(parse) do
-    input_stream() |> Enum.map(&tokens/1) |> Enum.map(parse) |> Enum.map(&eval/1) |> Enum.sum()
+  def run(input, parse) do
+    input
+    |> String.split("\n")
+    |> Enum.map(&tokens/1)
+    |> Enum.map(parse)
+    |> Enum.map(&eval/1)
+    |> Enum.sum()
   end
 
   def eval(n) when is_integer(n), do: n

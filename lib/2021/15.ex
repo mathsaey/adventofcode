@@ -1,12 +1,13 @@
 import AOC
 
 aoc 2021, 15 do
-  def p1, do: input_stream() |> parse() |> solve()
-  def p2, do: input_stream() |> parse() |> expand() |> solve()
+  def p1(input), do: input |> parse() |> solve()
+  def p2(input), do: input |> parse() |> expand() |> solve()
   def solve(stream), do: stream |> to_grid() |> a_star() |> score()
 
-  def parse(stream) do
-    stream
+  def parse(input) do
+    input
+    |> String.split("\n")
     |> Stream.map(&String.to_integer/1)
     |> Stream.map(&Integer.digits/1)
   end

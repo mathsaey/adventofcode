@@ -1,15 +1,21 @@
 import AOC
 
 aoc 2020, 10 do
-  def p1 do
-    %{1 => f_1, 3 => f_3} = diffs() |> Enum.concat([3]) |> Enum.frequencies()
+  def p1(input) do
+    %{1 => f_1, 3 => f_3} = diffs(input) |> Enum.concat([3]) |> Enum.frequencies()
     f_1 * f_3
   end
 
-  def p2, do: count(diffs()) + 1
+  def p2(input), do: count(diffs(input)) + 1
 
-  def input_stream, do: super() |> Stream.map(&String.to_integer/1)
-  def diffs, do: input_stream() |> Enum.sort() |> Enum.map_reduce(0, &{&1 - &2, &1}) |> elem(0)
+  def diffs(input) do
+    input
+    |> String.split("\n")
+    |> Stream.map(&String.to_integer/1)
+    |> Enum.sort()
+    |> Enum.map_reduce(0, &{&1 - &2, &1})
+    |> elem(0)
+  end
 
   # Start from the list of differences of the longest possible combination. A new combination is
   # possible if you can "collapse" two differences into one. Recursively count all possible

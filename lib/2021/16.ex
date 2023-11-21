@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 16 do
-  def p1, do: input_string() |> to_tree() |> count_versions()
-  def p2, do: input_string() |> to_tree() |> eval()
+  def p1(input), do: input |> to_tree() |> count_versions()
+  def p2(input), do: input |> to_tree() |> eval()
 
   def to_tree(string), do: string |> :binary.decode_hex() |> parse_package() |> elem(0)
 

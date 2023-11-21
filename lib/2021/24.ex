@@ -1,11 +1,11 @@
 import AOC
 
 aoc 2021, 24 do
-  def p1, do: solve(&p1_solver/1)
-  def p2, do: solve(&p2_solver/1)
+  def p1(input), do: solve(input, &p1_solver/1)
+  def p2(input), do: solve(input, &p2_solver/1)
 
-  def solve(solver) do
-    input_stream() |> parse() |> vars() |> to_constraints() |> solve_constraints(solver)
+  def solve(input, solver) do
+    input |> parse() |> vars() |> to_constraints() |> solve_constraints(solver)
   end
 
   def p1_solver(n) when n >= 0, do: {9, 9 - n}
@@ -53,8 +53,10 @@ aoc 2021, 24 do
     }
   end
 
-  def parse(stream) do
-    Stream.map(stream, fn
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(fn
       <<"inp ", a::binary-size(1)>> -> {:inp, String.to_atom(a)}
       <<"add ", rest::binary>> -> parse_binary_op(:add, rest)
       <<"mul ", rest::binary>> -> parse_binary_op(:mul, rest)

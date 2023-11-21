@@ -29,10 +29,10 @@ aoc 2021, 19 do
     end
   end)
 
-  def p1, do: input_string() |> parse() |> merge_scanners() |> elem(0) |> MapSet.size()
+  def p1(input), do: input |> parse() |> merge_scanners() |> elem(0) |> MapSet.size()
 
-  def p2 do
-    input_string()
+  def p2(input) do
+    input
     |> parse()
     |> merge_scanners()
     |> elem(1)

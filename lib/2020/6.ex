@@ -1,11 +1,11 @@
 import AOC
 
 aoc 2020, 6 do
-  def p1, do: solve(&MapSet.union/2)
-  def p2, do: solve(&MapSet.intersection/2)
+  def p1(input), do: solve(input, &MapSet.union/2)
+  def p2(input), do: solve(input, &MapSet.intersection/2)
 
-  def solve(joiner) do
-    input_string()
+  def solve(input, joiner) do
+    input
     |> String.split("\n\n")
     |> Enum.map(&group(&1, joiner))
     |> Enum.map(&Enum.count/1)

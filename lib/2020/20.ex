@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2020, 20 do
-  def p1 do
-    grid = parse() |> build_grid()
+  def p1(input) do
+    grid = input |> parse() |> build_grid()
 
     {{min_x, _}, {max_x, _}} = grid |> Map.keys() |> Enum.min_max_by(&elem(&1, 0))
     {{_, min_y}, {_, max_y}} = grid |> Map.keys() |> Enum.min_max_by(&elem(&1, 1))
@@ -13,8 +13,9 @@ aoc 2020, 20 do
     |> Enum.reduce(1, &(&1 * &2))
   end
 
-  def p2 do
-    parse()
+  def p2(input) do
+    input
+    |> parse()
     |> build_grid()
     |> to_picture()
     |> Enum.map(&Enum.join/1)
@@ -170,8 +171,8 @@ aoc 2020, 20 do
   # Parsing
   # -------
 
-  def parse do
-    input_string()
+  def parse(input) do
+    input
     |> String.split("\n\n")
     |> Enum.map(&parse_tile/1)
     |> Map.new()

@@ -1,11 +1,12 @@
 import AOC
 
 aoc 2021, 1 do
-  def input_stream, do: super() |> Stream.map(&String.to_integer/1)
-  def p1, do: input_stream() |> count_increasing()
+  def parse(input), do: input |> String.split("\n") |> Enum.map(&String.to_integer/1)
+  def p1(input), do: input |> parse() |> count_increasing()
 
-  def p2 do
-    input_stream()
+  def p2(input) do
+    input
+    |> parse()
     |> Stream.chunk_every(3, 1, :discard)
     |> Stream.map(&Enum.sum/1)
     |> count_increasing()

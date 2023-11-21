@@ -1,13 +1,13 @@
 import AOC
 
 aoc 2020, 19 do
-  def p1 do
-    {rules, input} = parse()
+  def p1(input) do
+    {rules, input} = parse(input)
     input |> Enum.filter(&check(&1, Map.get(rules, 0), rules)) |> Enum.count()
   end
 
-  def p2 do
-    {rules, input} = parse()
+  def p2(input) do
+    {rules, input} = parse(input)
     rules = rules |> Map.put(8, {[42], [42, 8]}) |> Map.put(11, {[42, 31], [42, 11, 31]})
 
     input |> Enum.filter(&check(&1, Map.get(rules, 0), rules)) |> Enum.count()
@@ -27,8 +27,8 @@ aoc 2020, 19 do
     end
   end
 
-  def parse do
-    [rules, input] = input_string() |> String.split("\n\n") |> Enum.map(&String.trim/1)
+  def parse(input) do
+    [rules, input] = input |> String.split("\n\n") |> Enum.map(&String.trim/1)
     {parse_rules(rules), String.split(input, "\n")}
   end
 

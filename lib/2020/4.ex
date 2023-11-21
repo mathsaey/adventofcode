@@ -1,13 +1,13 @@
 import AOC
 
 aoc 2020, 4 do
-  def p1, do: solve(&verify_p1?/1)
-  def p2, do: solve(&verify_p2?/1)
+  def p1(input), do: solve(input, &verify_p1?/1)
+  def p2(input), do: solve(input, &verify_p2?/1)
 
-  defp solve(verify), do: parsed_input() |> Enum.filter(verify) |> Enum.count()
-  defp parsed_input, do: input_string() |> String.split("\n\n") |> Enum.map(&parse/1)
+  defp solve(input,verify), do: input |> parse() |> Enum.filter(verify) |> Enum.count()
+  defp parse(input), do: input |> String.split("\n\n") |> Enum.map(&parse_inner/1)
 
-  defp parse(entry) do
+  defp parse_inner(entry) do
     entry
     |> String.split()
     |> Enum.map(&String.split(&1, ":"))

@@ -1,15 +1,16 @@
 import AOC
 
 aoc 2021, 22 do
-  def p1 do
-    input_stream()
-    |> Stream.filter(fn {_, ranges} ->
+  def p1(input) do
+    input
+    |> parse()
+    |> Enum.filter(fn {_, ranges} ->
       Enum.all?(ranges, fn first..last -> first in -50..50 and last in -50..50 end)
     end)
     |> solve()
   end
 
-  def p2, do: input_stream() |> solve()
+  def p2(input), do: input |> parse() |> solve()
 
   def solve(instructions) do
     instructions
@@ -41,8 +42,7 @@ aoc 2021, 22 do
 
   def cubes_in(cuboid), do: cuboid |> Enum.map(&Range.size/1) |> Enum.product()
 
-  def input_stream, do: super() |> Stream.map(&parse_step/1)
-  def example_stream, do: super() |> Stream.map(&parse_step/1)
+  def parse(input), do: input |> String.split("\n") |> Enum.map(&parse_step/1)
 
   def parse_step(str) do
     [on_or_off, rest] = String.split(str, " ")

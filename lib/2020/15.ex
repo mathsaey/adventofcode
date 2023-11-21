@@ -1,10 +1,10 @@
 import AOC
 
 aoc 2020, 15 do
-  def parse, do: input_string() |> String.split(",") |> Enum.map(&String.to_integer/1)
+  def parse(input), do: input |> String.split(",") |> Enum.map(&String.to_integer/1)
 
-  def seed do
-    {{el, turn}, lst} = parse() |> Enum.with_index(1) |> List.pop_at(-1)
+  def seed(input) do
+    {{el, turn}, lst} = input |> parse() |> Enum.with_index(1) |> List.pop_at(-1)
     {Map.new(lst), turn, el}
   end
 
@@ -16,8 +16,9 @@ aoc 2020, 15 do
     {map, turn + 1, res}
   end
 
-  def run(until) do
-    seed()
+  def run(input, until) do
+    input
+    |> seed()
     |> Stream.iterate(&turn/1)
     |> Stream.drop_while(fn {_, turn, _} -> turn < until end)
     |> Stream.take(1)
@@ -26,6 +27,6 @@ aoc 2020, 15 do
     |> elem(2)
   end
 
-  def p1, do: run(2020)
-  def p2, do: run(30000000)
+  def p1(input), do: run(input, 2020)
+  def p2(input), do: run(input, 30000000)
 end

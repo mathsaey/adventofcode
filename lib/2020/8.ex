@@ -1,11 +1,12 @@
 import AOC
 
 aoc 2020, 8 do
-  def p1, do: parse() |> run_until_revisit() |> elem(1)
-  def p2, do: parse() |> find_flip()
+  def p1(input), do: input |> parse() |> run_until_revisit() |> elem(1)
+  def p2(input), do: input |> parse() |> find_flip()
 
-  def parse do
-    input_stream()
+  def parse(input) do
+    input
+    |> String.split("\n")
     |> Enum.map(&String.split/1)
     |> Enum.map(fn [l, r] -> {String.to_existing_atom(l), String.to_integer(r)} end)
     |> :array.from_list()

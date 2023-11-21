@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2020, 7 do
-  def p1 do
-    root = parent(input_string())
+  def p1(input) do
+    root = parent(input)
 
     root
     |> Map.keys()
@@ -11,8 +11,8 @@ aoc 2020, 7 do
     |> Enum.count()
   end
 
-  def p2 do
-    root = parent(input_string())
+  def p2(input) do
+    root = parent(input)
     count(root["shiny gold"], root) - 1
   end
 

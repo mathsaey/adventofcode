@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 11 do
-  def p1 do
-    input_stream()
+  def p1(input) do
+    input
     |> parse()
     |> Stream.iterate(&step/1)
     |> Stream.map(&Enum.count(&1, fn {_, v} -> v == 0 end))
@@ -10,8 +10,8 @@ aoc 2021, 11 do
     |> Enum.sum()
   end
 
-  def p2 do
-    input_stream()
+  def p2(input) do
+    input
     |> parse()
     |> Stream.iterate(&step/1)
     |> Stream.map(&Enum.all?(&1, fn {_, v} -> v == 0 end))
@@ -20,12 +20,13 @@ aoc 2021, 11 do
     |> length()
   end
 
-  def parse(stream) do
-    stream
-    |> Stream.map(&String.to_integer/1)
-    |> Stream.map(&Integer.digits/1)
-    |> Stream.with_index()
-    |> Stream.flat_map(fn {lst, y} ->
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(&String.to_integer/1)
+    |> Enum.map(&Integer.digits/1)
+    |> Enum.with_index()
+    |> Enum.flat_map(fn {lst, y} ->
       lst |> Enum.with_index() |> Enum.map(fn {el, x} -> {{x, y}, el} end)
     end)
     |> Map.new()

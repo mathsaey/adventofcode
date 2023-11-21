@@ -1,13 +1,14 @@
 import AOC
 
 aoc 2020, 2 do
-  def p1, do: solve(&verify_p1/1)
-  def p2, do: solve(&verify_p2/1)
+  def p1(input), do: solve(input, &verify_p1/1)
+  def p2(input), do: solve(input, &verify_p2/1)
 
-  defp solve(verify) do
-    input_stream()
-    |> Stream.map(&parse/1)
-    |> Stream.filter(verify)
+  defp solve(input, verify) do
+    input
+    |> String.split("\n")
+    |> Enum.map(&parse/1)
+    |> Enum.filter(verify)
     |> Enum.count()
   end
 

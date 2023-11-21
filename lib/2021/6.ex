@@ -1,12 +1,15 @@
 import AOC
 
 aoc 2021, 6 do
-  def p1, do: solve(80)
-  def p2, do: solve(256)
-  def solve(days), do: input() |> to_map() |> simulate_loop(days) |> Map.values() |> Enum.sum()
+  def p1(input), do: solve(input, 80)
+  def p2(input), do: solve(input, 256)
 
-  def input do
-    input_string() |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
+  def solve(input, days) do
+    input |> parse() |> to_map() |> simulate_loop(days) |> Map.values() |> Enum.sum()
+  end
+
+  def parse(input) do
+    input |> String.trim() |> String.split(",") |> Enum.map(&String.to_integer/1)
   end
 
   def to_map(lst) do

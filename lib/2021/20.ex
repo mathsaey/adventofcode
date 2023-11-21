@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2021, 20 do
-  def p1, do: input_string() |> solve(2)
-  def p2, do: input_string() |> solve(50)
+  def p1(input), do: solve(input, 2)
+  def p2(input), do: solve(input, 50)
 
   def solve(str, n) do
     {iea, img} = parse(str)

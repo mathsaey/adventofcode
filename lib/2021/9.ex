@@ -1,12 +1,12 @@
 import AOC
 
 aoc 2021, 9 do
-  def p1 do
-    input_stream() |> parse() |> low_points() |> Stream.map(fn {_, h} -> h + 1 end) |> Enum.sum()
+  def p1(input) do
+    input |> parse() |> low_points() |> Stream.map(fn {_, h} -> h + 1 end) |> Enum.sum()
   end
 
-  def p2 do
-    map = input_stream() |> parse()
+  def p2(input) do
+    map = parse(input)
     low_points = map |> low_points() |> Enum.map(fn {c, _} -> {c, c} end) |> Map.new()
 
     map
@@ -19,10 +19,11 @@ aoc 2021, 9 do
     |> Enum.reduce(1, &(&1 * &2))
   end
 
-  def parse(stream) do
-    stream
-    |> Stream.with_index()
-    |> Stream.flat_map(fn {str, y} ->
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.with_index()
+    |> Enum.flat_map(fn {str, y} ->
       str
       |> String.graphemes()
       |> Enum.map(&String.to_integer/1)

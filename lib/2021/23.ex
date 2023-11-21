@@ -6,10 +6,10 @@ aoc 2021, 23 do
 
   @hallway_spots Enum.reject(@hallway, fn {x, _} -> x in @room_xs end)
 
-  def p1, do: input_string() |> parse() |> solve()
+  def p1(input), do: input |> parse() |> solve()
 
-  def p2 do
-    [top, hallway, room_top, room, bot] = String.split(input_string(), "\n")
+  def p2(input) do
+    [top, hallway, room_top, room, bot] = String.split(input, "\n")
     [top, hallway, room_top, "  #D#C#B#A#", "  #D#B#A#C#", room, bot]
     |> Enum.join("\n")
     |> parse()

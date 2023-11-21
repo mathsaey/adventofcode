@@ -1,8 +1,8 @@
 import AOC
 
 aoc 2020, 1 do
-  def p1 do
-    input = input_stream() |> Stream.map(&String.to_integer/1) |> Enum.to_list()
+  def p1(input) do
+    input = input |> String.split("\n") |> Stream.map(&String.to_integer/1) |> Enum.to_list()
     tups = eat(input, tl(input))
 
     tups
@@ -12,8 +12,8 @@ aoc 2020, 1 do
     |> hd()
   end
 
-  def p2 do
-    input = input_stream() |> Stream.map(&String.to_integer/1) |> Enum.to_list()
+  def p2(input) do
+    input = input |> String.split("\n") |> Stream.map(&String.to_integer/1) |> Enum.to_list()
     tups = eat(input, tl(input), tl(tl(input)))
 
     tups

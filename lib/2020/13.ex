@@ -1,19 +1,19 @@
 import AOC
 
 aoc 2020, 13 do
-  def p1 do
-    {t0, ids} = parse()
+  def p1(input) do
+    {t0, ids} = parse(input)
     {id, t} = ids |> Enum.map(&{&1, first_bus(&1, t0)}) |> Enum.min_by(&elem(&1, 1))
     id * (t - t0)
   end
 
-  def p2 do
-    {p, o} = parse() |> elem(1) |> with_offset() |> Enum.reduce(&merge/2)
+  def p2(input) do
+    {p, o} = input |> parse() |> elem(1) |> with_offset() |> Enum.reduce(&merge/2)
     if o < 0, do: abs(o), else: p - o
   end
 
-  def parse do
-    [t0, ids] = input_string() |> String.split("\n")
+  def parse(input) do
+    [t0, ids] = String.split(input, "\n")
     {String.to_integer(t0), ids |> String.split(",") |> Enum.map(&parse_entry/1)}
   end
 

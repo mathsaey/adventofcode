@@ -1,13 +1,13 @@
 import AOC
 
 aoc 2021, 13 do
-  def p1 do
-    {dots, [fold | _]} = input_string() |> parse()
+  def p1(input) do
+    {dots, [fold | _]} = input |> parse()
     fold |> fold(dots) |> MapSet.size()
   end
 
-  def p2 do
-    {dots, folds} = input_string() |> parse()
+  def p2(input) do
+    {dots, folds} = input |> parse()
     folds |> Enum.reduce(dots, &fold/2) |> print()
   end
 

@@ -22,9 +22,10 @@ import AOC
 aoc 2021, 8 do
   @unique_segments [2, 4, 3, 7]
 
-  def parse(stream) do
-    stream
-    |> Stream.map(fn str ->
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(fn str ->
       [l, r] = String.split(str, " | ")
       {parse_values(l), parse_values(r)}
     end)
@@ -37,16 +38,16 @@ aoc 2021, 8 do
     |> Enum.map(fn lst -> Enum.map(lst, &String.to_atom/1) end)
   end
 
-  def p1 do
-    input_stream()
+  def p1(input) do
+    input
     |> parse()
     |> Stream.flat_map(&elem(&1, 1))
     |> Stream.filter(&(length(&1) in @unique_segments))
     |> Enum.count()
   end
 
-  def p2 do
-    input_stream()
+  def p2(input) do
+    input
     |> parse()
     |> Stream.map(&decode/1)
     |> Enum.sum()
