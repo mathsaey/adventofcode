@@ -10,8 +10,7 @@ aoc 2023, 9 do
     |> Stream.iterate(&difference/1)
     |> Enum.take_while(fn lst -> Enum.any?(lst, &(&1 != 0)) end)
     |> Enum.map(&List.last/1)
-    |> Enum.reverse()
-    |> Enum.reduce(0, &(&1 + &2))
+    |> Enum.sum()
   end
 
   def difference(lst) do
