@@ -1,7 +1,7 @@
 %{
   "advent_of_code_utils": {:hex, :advent_of_code_utils, "4.0.1", "591073a49600cbceae6d92e0fb2d2c56b59f6d383851e2a7c00c3bf0e4f33f4f", [:mix], [{:floki, "~> 0.34", [hex: :floki, repo: "hexpm", optional: false]}, {:tz, "~> 0.26", [hex: :tz, repo: "hexpm", optional: false]}], "hexpm", "684d016883d7b5443d9d22abc34013fb6f1d5d9ff114859a40890545a570eec8"},
   "floki": {:hex, :floki, "0.35.2", "87f8c75ed8654b9635b311774308b2760b47e9a579dabf2e4d5f1e1d42c39e0b", [:mix], [], "hexpm", "6b05289a8e9eac475f644f09c2e4ba7e19201fd002b89c28c1293e7bd16773d9"},
-  "heap": {:hex, :heap, "2.0.2", "d98cb178286cfeb5edbcf17785e2d20af73ca57b5a2cf4af584118afbcf917eb", [:mix], [], "hexpm", "ba9ea2fe99eb4bcbd9a8a28eaf71cbcac449ca1d8e71731596aace9028c9d429"},
+  "heap": {:hex, :heap, "3.0.0", "c6dbcd6e9a0b021432176e89cfd829dd065bd6c115981fdcd981a4251fff5fde", [:mix], [], "hexpm", "373eaca5787e2a2b009c42338e70414f590ceabcf96cfc786627ed762ad4dfc6"},
   "html_entities": {:hex, :html_entities, "0.5.2", "9e47e70598da7de2a9ff6af8758399251db6dbb7eebe2b013f2bbd2515895c3c", [:mix], [], "hexpm", "c53ba390403485615623b9531e97696f076ed415e8d8058b1dbaa28181f4fdcc"},
   "libgraph": {:hex, :libgraph, "0.16.0", "3936f3eca6ef826e08880230f806bfea13193e49bf153f93edcf0239d4fd1d07", [:mix], [], "hexpm", "41ca92240e8a4138c30a7e06466acc709b0cbb795c643e9e17174a178982d6bf"},
   "qex": {:hex, :qex, "0.5.1", "0d82c0f008551d24fffb99d97f8299afcb8ea9cf99582b770bd004ed5af63fd6", [:mix], [], "hexpm", "935a39fdaf2445834b95951456559e9dc2063d0a055742c558a99987b38d6bab"},

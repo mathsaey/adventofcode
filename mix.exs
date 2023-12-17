@@ -14,7 +14,7 @@ defmodule Aoc.MixProject do
     [
       {:advent_of_code_utils, "~> 4.0"},
       {:libgraph, "~> 0.16"},
-      {:heap, "~> 2.0"},
+      {:heap, "~> 3.0"},
       {:qex, "~> 0.5"}
     ]
   end
