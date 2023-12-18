@@ -26,6 +26,20 @@ defmodule Utils do
       {min_x..max_x, min_y..max_y}
     end
 
+    def draw(grid, transform \\ &Function.identity/1, empty \\ ".") do
+      {xs, ys} = bounds(grid)
+      for y <- ys do
+        for x <- xs do
+          case grid[{x, y}] do
+            nil -> IO.write(empty)
+            e -> IO.write(transform.(e))
+          end
+        end
+        IO.puts("")
+      end
+      grid
+    end
+
     def input_to_map(input, parse_el \\ &Function.identity/1) do
       input
       |> String.split("\n")
