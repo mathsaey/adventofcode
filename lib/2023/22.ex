@@ -71,7 +71,7 @@ aoc 2023, 22 do
 
   def drop(bricks), do: bricks |> Enum.reduce({[], %{}}, &drop/2) |> elem(0) |> bottom_to_top()
 
-  def drop(t = {xs, ys, zf..zt}, {dropped, z_cache}) do
+  def drop({xs, ys, zf..zt}, {dropped, z_cache}) do
     lowest_z = Enum.max(for(x <- xs, y <- ys, do: Map.get(z_cache, {x, y}, 0))) + 1
     t = {xs, ys, lowest_z..(lowest_z + (zt - zf))}
     {[t | dropped], update_z_cache(z_cache, t)}
