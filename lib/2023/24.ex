@@ -1,8 +1,10 @@
 import AOC
 
 aoc 2023, 24 do
-  # I can't math anymore, solution based on https://www.youtube.com/watch?v=guOyA7Ijqgk
-  #
+  # I can't math anymore, part 1 solution based on https://www.youtube.com/watch?v=guOyA7Ijqgk
+  # Part 2 based on the idea presented here: https://old.reddit.com/r/adventofcode/comments/18pptor/2023_day_24_part_2java_is_there_a_trick_for_this/keps780/?context=3
+  # with the optimisation mentioned here: https://old.reddit.com/r/adventofcode/comments/18pptor/2023_day_24_part_2java_is_there_a_trick_for_this/kepxbew/
+
   def p1(input) do
     input
     |> parse()
@@ -22,10 +24,10 @@ aoc 2023, 24 do
     stones = parse(input)
     impossible = impossible_velocities(stones)
 
-    @range
     # First we find a valid x, y coordinate
-    |> x_y_stream()
-    # Remove all velocities that cannot possibly contain an answer
+    @range
+    |> Stream.flat_map(fn x -> Stream.map(@range, fn y -> {x, y} end) end)
+    # Remove all x and y velocities that cannot possibly contain an answer
     |> Stream.reject(fn {x, _} -> Enum.any?(impossible.x, &(x in &1)) end)
     |> Stream.reject(fn {_, y} -> Enum.any?(impossible.y, &(y in &1)) end)
     # Caculate the intersection point for all the rocks with their velocity adjusted relative to
@@ -33,11 +35,14 @@ aoc 2023, 24 do
     |> Stream.map(fn {x, y} ->
       stones
       |> Stream.map(&drop_z/1)
+      # adjust velocity
       |> Stream.map(fn p = %{vx: vx, vy: vy} -> %{p | vx: vx - x, vy: vy - y} end)
       |> Stream.map(&normalize/1)
+      # speed things up a bit, it is enough to have a match on > 2 rocks
       |> Stream.take(4)
       |> Stream.chunk_every(2, 1, :discard)
       |> Stream.map(fn [l, r] -> if(parallel?({l, r}), do: false, else: intersection({l, r})) end)
+      # find out if the intersection between all rocks is the same
       |> Enum.reduce_while(nil, fn
         false, _ -> {:halt, false}
         c, nil -> {:cont, c}
@@ -48,41 +53,35 @@ aoc 2023, 24 do
     end)
     # Filter out all {x, y}s which don't have the same intersection for all rocks
     |> Stream.filter(fn {_, i} -> i end)
-    # Add valid z coordinates
+    # Add valid z coordinates, remove impossible z coordinates
     |> Stream.flat_map(fn {{x, y}, i} -> Stream.map(@range, fn z -> {{x, y, z}, i} end) end)
     |> Stream.reject(fn {{_, _, z}, _} -> Enum.any?(impossible.z, &(z in &1)) end)
     |> Stream.map(fn {{x, y, z}, i} ->
       stones
-      |> Stream.map(fn p = %{vx: vx, vy: vy, vz: vz} -> %{p | vx: vx - x, vy: vy - y, vz: vz - z} end)
+      # adjust velocity
+      |> Stream.map(fn p = %{vx: vx, vy: vy, vz: vz} ->
+        %{p | vx: vx - x, vy: vy - y, vz: vz - z}
+      end)
+      # calculate the time step t at which the rock reach the intersection point
       |> Stream.map(&Map.put(&1, :t, div(trunc(i.x) - &1.sx, &1.vx)))
+      # using t, calculate z
       |> Stream.map(&(&1.sz + &1.t * &1.vz))
       |> Stream.take(4)
       |> Enum.to_list()
+      # find out if the z coordinate between the rocks matches
       |> Enum.reduce_while(nil, fn
         z, nil -> {:cont, z}
         z, prev -> if(z == prev, do: {:cont, z}, else: {:halt, false})
       end)
       |> then(&{{x, y, z}, i, &1})
     end)
+    # We should now have one coordinate left: our result
     |> Stream.filter(fn {_, _, i} -> i end)
     |> Enum.at(0)
     |> then(fn {_, %{y: y, x: x}, z} -> x + y + z end)
     |> trunc()
   end
 
-  def x_y_stream(range) do
-    Stream.flat_map(range, fn x -> Stream.map(range, fn y -> {x, y} end) end)
-  end
-
-  def possible_values_stream(min, max) do
-    min..max
-    |> Stream.flat_map(fn x -> Stream.map(min..max, fn y -> {x, y} end) end)
-    |> Stream.flat_map(fn {x, y} -> Stream.map(min..max, fn z -> {x, y, z} end) end)
-  end
-
-  # Make a list of ranges that cannot contain valid vectors.
-  # Idea from:
-  # https://old.reddit.com/r/adventofcode/comments/18pptor/2023_day_24_part_2java_is_there_a_trick_for_this/kepxbew/
   def impossible_velocities(stones) do
     stones
     |> pairs()
@@ -108,7 +107,6 @@ aoc 2023, 24 do
     end)
     |> Map.new()
   end
-
 
   def pairs([]), do: []
   def pairs([hd | tl]), do: Enum.map(tl, &{hd, &1}) ++ pairs(tl)
