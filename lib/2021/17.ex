@@ -2,7 +2,7 @@ import AOC
 
 aoc 2021, 17 do
   def p1(input) do
-    {_, y1.._} = parse(input)
+    {_, y1.._//_} = parse(input)
     # We are looking for the highest possible throw => positive y, independent of chosen x
     # Ball falls with same velocity as going up.
     # Fastest fall speed => from 0 to y (bottom of target) in one step, otherwise we miss.
@@ -32,7 +32,7 @@ aoc 2021, 17 do
     |> List.to_tuple()
   end
 
-  def candidates({x1..x2, y1.._}) do
+  def candidates({x1..x2//_, y1.._//_}) do
     # We overshoot the target if we shoot faster than its furthest edge
     # We undershoot the target if we don't have enough speed to reach its closest edge.
     # max y -> speed from p1
@@ -60,5 +60,5 @@ aoc 2021, 17 do
   def in?({px, py}, {rx, ry}), do: px in rx and py in ry
   def in?(path, target), do: Enum.any?(path, &in?(&1, target))
 
-  def past?({px, py}, {tx1..tx2, ty1..ty2}), do: px > max(tx1, tx2) or py < min(ty1, ty2)
+  def past?({px, py}, {tx1..tx2//_, ty1..ty2//_}), do: px > max(tx1, tx2) or py < min(ty1, ty2)
 end

@@ -19,7 +19,7 @@ aoc 2023, 3 do
     numbers =
       grid
       |> extract_numbers()
-      |> Enum.flat_map(fn num = {{start_x..stop_x, y}, _} ->
+      |> Enum.flat_map(fn num = {{start_x..stop_x//_, y}, _} ->
         for x <- start_x..stop_x, do: {{x, y}, num}
       end)
       |> Map.new()
@@ -41,7 +41,7 @@ aoc 2023, 3 do
     |> Enum.sum()
   end
 
-  def adjacent({start_x..stop_x, y}) do
+  def adjacent({start_x..stop_x//_, y}) do
     lst = for x <- start_x - 1..stop_x + 1, y <- [y - 1, y + 1], do: {x, y}
     [{start_x - 1, y}, {stop_x + 1, y} | lst]
     |> Enum.filter(fn {x, y} -> x >= 0 and y >= 0 end)
@@ -62,7 +62,7 @@ aoc 2023, 3 do
         {nil, nil, nums} when is_map_key(digits, {x, y}) ->
           {{x..x, y}, [digits[{x, y}]], nums}
         # We are building a number and see another digit
-        {{first_x.._, y}, prev, nums} when is_map_key(digits, {x, y}) ->
+        {{first_x.._//_, y}, prev, nums} when is_map_key(digits, {x, y}) ->
           {{first_x..x, y}, [digits[{x, y}] | prev], nums}
         # We are not building a number and don't see anything
         tup = {nil, nil, _} -> tup

@@ -19,7 +19,7 @@ aoc 2023, 5 do
 
     maps
     |> Enum.reduce(seed_ranges, &map_over_seed_ranges/2)
-    |> Enum.map(fn from.._ -> from end)
+    |> Enum.map(fn from.._//_ -> from end)
     |> Enum.min()
   end
 
@@ -44,7 +44,7 @@ aoc 2023, 5 do
     end)
   end
 
-  def split_seed_range(seed_range = s_from..s_to, map_range = %{range: m_from..m_to, diff: d}) do
+  def split_seed_range(seed_range = s_from..s_to//_, map_range = %{range: m_from..m_to//_, diff: d}) do
     cond do
       Range.disjoint?(seed_range, map_range.range) ->
         # seed_range and map_range don't overlap

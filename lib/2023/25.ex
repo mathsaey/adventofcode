@@ -3,7 +3,7 @@ import AOC
 aoc 2023, 25 do
   def p1(input) do
     graph = parse(input)
-    connections = [{l, r} | _]= find_critical_connections(graph) |> dbg()
+    connections = [{_, _} | _] = find_critical_connections(graph)
 
     graph
     |> Graph.delete_edges(connections)

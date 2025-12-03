@@ -100,7 +100,7 @@ aoc 2023, 24 do
       |> Enum.sort()
       |> Enum.reduce({[], nil}, fn
         range, {[], nil} -> {[], range}
-        from..to, {ranges, pfrom..pto} when from >= pfrom and from <= pto -> {ranges, pfrom..to}
+        from..to//_, {ranges, pfrom..pto//_} when from >= pfrom and from <= pto -> {ranges, pfrom..to}
         range, {ranges, prev} -> {[prev | ranges], range}
       end)
       |> then(fn {ranges, prev} -> {d, [prev | ranges]} end)

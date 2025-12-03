@@ -26,7 +26,7 @@ aoc 2023, 19 do
   def symbolic_eval(_, [false]), do: [false]
 
   def symbolic_eval(ranges, [{lhs, :<, rhs, thn} | tl]) do
-    low..high = ranges[lhs]
+    low..high//_ = ranges[lhs]
     cond do
       rhs < low -> symbolic_eval(ranges, tl)
       rhs > high -> symbolic_eval(ranges, thn)
@@ -38,7 +38,7 @@ aoc 2023, 19 do
   end
 
   def symbolic_eval(ranges, [{lhs, :>, rhs, thn} | tl]) do
-    low..high = ranges[lhs]
+    low..high//_ = ranges[lhs]
     cond do
       low > rhs -> symbolic_eval(ranges, thn)
       high < rhs -> symbolic_eval(ranges, thn)

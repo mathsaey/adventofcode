@@ -13,7 +13,7 @@ aoc 2023, 16 do
     |> Enum.map(fn {:ok, res} -> res end)
   end
 
-  def all_starts({_, xrange = min_x..max_x, yrange = min_y..max_y}) do
+  def all_starts({_, xrange = min_x..max_x//_, yrange = min_y..max_y//_}) do
     Enum.concat(
       Enum.flat_map(xrange, fn x -> [{:north, {x, max_y}}, {:south, {x, min_y}}] end),
       Enum.flat_map(yrange, fn y -> [{:west, {max_x, y}}, {:east, {min_x, y}}] end)
@@ -22,7 +22,7 @@ aoc 2023, 16 do
 
   def follow(grid, start), do: follow(MapSet.new([start]), [start], grid)
 
-  def follow(seen, beams, grid_with_bounds = {grid, min_x..max_x, min_y..max_y}) do
+  def follow(seen, beams, grid_with_bounds = {grid, min_x..max_x//_, min_y..max_y//_}) do
     beams
     |> Enum.flat_map(fn t = {_, pos} -> next(t, grid[pos]) end)
     |> Enum.reject(fn {_, {x, y}} -> x < min_x or x > max_x or y < min_y or y > max_y end)

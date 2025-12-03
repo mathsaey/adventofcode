@@ -65,13 +65,13 @@ aoc 2023, 22 do
   def supported_by(bricks), do: bricks |> Enum.map(&{&1, supported_by(&1, bricks)}) |> Map.new()
   def supported_by(brick, all_bricks), do: Enum.filter(all_bricks, &supports?(&1, brick))
 
-  def supports?({lx, ly, _..lz}, {rx, ry, rz.._}) do
+  def supports?({lx, ly, _..lz//_}, {rx, ry, rz.._//_}) do
     lz == rz - 1 and not Range.disjoint?(lx, rx) and not Range.disjoint?(ly, ry)
   end
 
   def drop(bricks), do: bricks |> Enum.reduce({[], %{}}, &drop/2) |> elem(0) |> bottom_to_top()
 
-  def drop({xs, ys, zf..zt}, {dropped, z_cache}) do
+  def drop({xs, ys, zf..zt//_}, {dropped, z_cache}) do
     lowest_z = Enum.max(for(x <- xs, y <- ys, do: Map.get(z_cache, {x, y}, 0))) + 1
     t = {xs, ys, lowest_z..(lowest_z + (zt - zf))}
     {[t | dropped], update_z_cache(z_cache, t)}

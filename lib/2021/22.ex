@@ -5,7 +5,7 @@ aoc 2021, 22 do
     input
     |> parse()
     |> Enum.filter(fn {_, ranges} ->
-      Enum.all?(ranges, fn first..last -> first in -50..50 and last in -50..50 end)
+      Enum.all?(ranges, fn first..last//_ -> first in -50..50 and last in -50..50 end)
     end)
     |> solve()
   end
@@ -30,7 +30,7 @@ aoc 2021, 22 do
 
   def do_remove([], []), do: []
 
-  def do_remove([cb_start..cb_end | cb_tl], [ch_start..ch_end | ch_tl]) do
+  def do_remove([cb_start..cb_end//_ | cb_tl], [ch_start..ch_end//_ | ch_tl]) do
     pre = cb_start..(ch_start - 1)//1
     post = (ch_end + 1)..cb_end//1
 

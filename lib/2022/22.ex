@@ -129,10 +129,10 @@ aoc 2022, 22 do
     end)
   end
 
-  def side_match?(:left, %{x: lx.._, y: y}, %{x: _..rx, y: y}), do: rx + 1 == lx
-  def side_match?(:right, %{x: _..rx, y: y}, %{x: lx.._, y: y}), do: rx + 1 == lx
-  def side_match?(:up, %{x: x, y: ty.._}, %{x: x, y: _..by}), do: by + 1 == ty
-  def side_match?(:down, %{x: x, y: _..by}, %{x: x, y: ty.._}), do: by + 1 == ty
+  def side_match?(:left, %{x: lx.._//_, y: y}, %{x: _..rx//_, y: y}), do: rx + 1 == lx
+  def side_match?(:right, %{x: _..rx//_, y: y}, %{x: lx.._//_, y: y}), do: rx + 1 == lx
+  def side_match?(:up, %{x: x, y: ty.._//_}, %{x: x, y: _..by//_}), do: by + 1 == ty
+  def side_match?(:down, %{x: x, y: _..by//_}, %{x: x, y: ty.._//_}), do: by + 1 == ty
   def side_match?(_, _, _), do: false
 
   def identify_sides(map) do

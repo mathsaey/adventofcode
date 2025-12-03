@@ -33,7 +33,7 @@ aoc 2022, 15 do
   def in_range?({sx, sy, d}, beacon), do: distance(beacon, {sx, sy}) <= d
   def in_range?(sensors, beacon), do: Enum.any?(sensors, &in_range?(&1, beacon))
 
-  def merge(lf..lt, rf..rt), do: min(lf, rf)..max(lt, rt)
+  def merge(lf..lt//_, rf..rt//_), do: min(lf, rf)..max(lt, rt)
 
   def range_for_row({x, y, d}, row) do
     width = d - abs(row - y)
